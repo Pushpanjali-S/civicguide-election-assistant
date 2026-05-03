@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicGuide - Knowledge Base Test Suite</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0B1F3A;
+            --green: #2E7D32;
+            --red: #C62828;
+            --cream: #FAF7F0;
+            --border: rgba(11, 31, 58, 0.12);
+        }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--navy);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 { margin-bottom: 5px; }
+        .summary {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-weight: bold;
+        }
+        .test-case {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .status {
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .status.pass { background: #E8F5E9; color: var(--green); }
+        .status.fail { background: #FFEBEE; color: var(--red); }
+        .details { flex: 1; }
+        .query { font-weight: 500; margin-bottom: 4px; }
+        .error { color: var(--red); font-size: 0.9rem; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Knowledge Base Test Suite</h1>
+    <p>Validating all 15 core topics across different regions.</p>
+    
+    <div class="summary" id="summary">Running tests...</div>
+    <div id="results"></div>
+
+    <script src="../knowledge.js"></script>
+    <script src="test.js"></script>
+</body>
+</html>
