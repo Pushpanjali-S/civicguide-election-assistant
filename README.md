@@ -1,116 +1,128 @@
 # CivicGuide — AI Election Assistant
 
-> An interactive, AI-powered assistant that helps citizens understand elections — registration, timelines, voting processes, and electoral systems — in a clear, non-partisan way.
+> An interactive election education assistant — fully self-contained, zero API keys, zero backend. Works offline.
+
+**Live Demo:** `https://YOUR-SERVICE-abc123-uc.a.run.app`  
+**GitHub:** `https://github.com/YOUR_USERNAME/civicguide`
 
 ---
 
 ## Chosen Vertical
 
-**Civic Education / Government Services** — empowering citizens to understand and participate in the democratic process.
+**Civic Education / Government Services** — helping citizens understand elections, their rights, and the democratic process in a clear, non-partisan way.
 
 ---
 
 ## How It Works
 
-CivicGuide is a single-page web application powered by the **Claude AI API (claude-sonnet-4-20250514)**. It provides:
-
-- **Conversational Q&A** — Ask any question about elections in natural language
-- **Country-specific answers** — Select from 10 countries; the AI tailors responses accordingly
-- **Visual election timeline** — An interactive step-by-step breakdown of the election process
-- **Quick topic shortcuts** — One-click access to common topics (registration, voting, results)
-- **Persistent conversation history** — Context is maintained throughout the session
-
----
-
-## Approach & Logic
-
-### AI System Prompt Design
-The assistant is given a carefully crafted system prompt that enforces:
-- **Non-partisan neutrality** — no political opinions or candidate endorsements
-- **Country context** — responses adapt to the selected country's electoral system
-- **Educational tone** — clear, accessible language with structured formatting
+CivicGuide is a **100% static single-file web app** — no API keys, no server, no backend. It runs entirely in the browser using a built-in knowledge engine.
 
 ### Architecture
+
 ```
-index.html (single file)
-├── CSS — Navy/gold civic design system, responsive layout
-├── HTML — Sidebar navigation, chat area, input bar
-└── JavaScript
-    ├── Anthropic API calls (claude-sonnet-4-20250514)
-    ├── Conversation history management
-    ├── Markdown-to-HTML formatting
-    └── Interactive timeline renderer
+index.html  (single file — HTML + CSS + JS)
+│
+├── Built-in Knowledge Base (KB)
+│   ├── 15+ topic modules covering all major election topics
+│   ├── Country-specific data for US, India, UK, Canada, Australia + General
+│   └── Keyword matching engine with fuzzy topic detection
+│
+├── Interactive UI
+│   ├── Conversational chat interface
+│   ├── Visual 9-step election timeline
+│   ├── Country selector (10 countries)
+│   ├── Quick topic sidebar with 11 topics
+│   └── Follow-up suggestion chips
+│
+└── Dockerfile
+    └── nginx:alpine — serves index.html on port 8080 for Cloud Run
 ```
 
-### Conversation Flow
-1. User selects their country from the sidebar
-2. User types a question or clicks a quick-topic button
-3. Full conversation history is sent to Claude API with a civic-education system prompt
-4. Response is formatted (bold, lists, headers) and displayed in the chat
-5. History accumulates for contextual follow-ups
+### Knowledge Topics Covered
 
----
-
-## Features
-
-| Feature | Description |
+| Topic | Details |
 |---|---|
-| 🤖 AI Chat | Claude-powered Q&A on any election topic |
-| 🌍 Multi-country | 10 countries + General mode |
-| 📅 Visual Timeline | 9-step interactive election process timeline |
-| ⚡ Quick Topics | Pre-built buttons for the most common questions |
-| 📱 Responsive | Works on desktop and mobile |
-| 🎨 Branded UI | Navy + gold civic aesthetic, Playfair Display typography |
+| Voter Registration | Eligibility, documents, deadlines, online portals — per country |
+| Electoral Systems | FPTP, Proportional Representation, Ranked Choice, Two-Round |
+| Election Day | Polling hours, what to bring, accessibility, rights |
+| Mail-in / Absentee Voting | How to request, complete, and return a ballot |
+| Vote Counting | Step-by-step from polls close to results declared |
+| Certification & Inauguration | Canvassing, certification, transition, swearing in |
+| Types of Elections | General, local, primary, by-election, referendum |
+| Voter Rights | Secret ballot, non-discrimination, accessibility, complaints |
+| Running for Office | Filing, nomination, campaign finance |
+| Gerrymandering | Packing, cracking, redistricting, independent commissions |
+| Misinformation | How to spot & fact-check election claims |
+| Coalition / Hung Parliament | What happens when no majority is won |
+| Early Voting | Advance polls, pre-poll voting by country |
+| Recounts & Disputes | Types of recounts, audits, legal challenges |
+| Election Timeline | Visual 9-step interactive timeline |
 
 ---
 
-## Google Services Integration
+## Running the App
 
-The assistant is built to integrate with Google Services in the following ways:
-
-- **Google Fonts** — Playfair Display + DM Sans for typography
-- **Gemini API** — Can be swapped to use `gemini-2.0-flash` for responses (see note below)
-- **Google Cloud / Firebase** — Can host the app and store user sessions
-
-> To switch to Gemini: replace the fetch endpoint with `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent` and update the request body format.
-
----
-
-## Setup & Running
-
-### Option 1: Direct Browser
+### Option 1 — Open directly in browser (no server needed)
 ```bash
-# Just open the file
 open index.html
+# or double-click the file
 ```
 
-### Option 2: Local Server
+### Option 2 — Run in Antigravity
+1. Open Antigravity
+2. Clone this repo into a workspace
+3. Open `index.html` in the browser panel — it runs immediately
+
+### Option 3 — Local server
 ```bash
-# Python
 python3 -m http.server 8080
-
-# Node.js
-npx serve .
+# visit http://localhost:8080
 ```
 
-### Option 3: Deploy to GitHub Pages
+### Option 4 — Docker locally
 ```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/YOUR_USERNAME/civicguide.git
-git push -u origin main
-# Enable GitHub Pages in repository settings
+docker build -t civicguide .
+docker run -p 8080:8080 civicguide
+# visit http://localhost:8080
 ```
+
+---
+
+## Deploying to Google Cloud Run
+
+```bash
+# Authenticate
+gcloud auth login
+gcloud config set project YOUR_PROJECT_ID
+
+# Deploy (builds container and deploys in one command)
+gcloud run deploy civicguide \
+  --source . \
+  --region us-central1 \
+  --platform managed \
+  --allow-unauthenticated \
+  --port 8080
+```
+
+No environment variables, no secrets, no API keys needed. The deployment completes in ~2 minutes.
+
+---
+
+## Google Services Used
+
+- **Google Fonts** — Playfair Display + DM Sans typography
+- **Google Cloud Run** — Serverless container hosting
+- **Google Antigravity** — Used to develop, test, and deploy the application
+- **Built to integrate with Gemini** — The knowledge engine can be augmented with Gemini API calls with zero structural changes
 
 ---
 
 ## Assumptions
 
-1. The Anthropic API key is handled by the hosting environment (Anthropic's claude.ai artifact runner) — no key is hardcoded
-2. Election information is general and educational; users are advised to verify current laws with official government sources
-3. The assistant is non-partisan and avoids commentary on specific candidates, parties, or political positions
-4. Timeline dates shown are approximate templates; actual dates vary by country and election cycle
+1. The app covers general election education — users are directed to official government sources for jurisdiction-specific current rules
+2. Country data covers the most common scenarios; local elections may vary
+3. The app is intentionally non-partisan — it explains processes, not political positions
+4. All information is built-in; no internet connection required after the initial page load
 
 ---
 
@@ -118,20 +130,9 @@ git push -u origin main
 
 ```
 /
-├── index.html     # Complete app (single file — HTML + CSS + JS)
-└── README.md      # This file
+├── index.html    # Complete app — HTML + CSS + JS knowledge engine
+├── Dockerfile    # nginx:alpine container for Cloud Run
+└── README.md     # This file
 ```
 
 ---
-
-## Evaluation Notes
-
-- **Code Quality** — Single-file architecture, well-commented sections, CSS variables for theming
-- **Security** — No hardcoded API keys; all responses processed client-side
-- **Efficiency** — Conversation history pruned to relevant context; minimal dependencies
-- **Accessibility** — Semantic HTML, readable contrast ratios, keyboard navigation support
-- **Google Services** — Google Fonts integrated; architecture ready for Gemini API and Firebase
-
----
-
-*Built for civic education. Democracy works best when citizens are informed.*

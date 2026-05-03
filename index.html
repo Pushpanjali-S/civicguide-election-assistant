@@ -23,7 +23,6 @@
             --text-muted: #7A8FA8;
             --border: rgba(11, 31, 58, 0.12);
             --shadow-sm: 0 2px 8px rgba(11, 31, 58, 0.08);
-            --shadow-md: 0 8px 32px rgba(11, 31, 58, 0.14);
             --radius: 12px;
             --radius-lg: 20px;
         }
@@ -43,14 +42,14 @@
             flex-direction: column;
         }
 
-        /* ── HEADER ── */
+        /* HEADER */
         header {
             background: var(--navy);
-            padding: 0 2rem;
+            padding: 0 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 64px;
+            height: 60px;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -60,36 +59,60 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .logo-icon {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             background: var(--gold);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
         }
 
         .logo-icon svg {
-            width: 18px;
-            height: 18px;
+            width: 17px;
+            height: 17px;
             fill: var(--navy);
         }
 
         .logo-text {
             font-family: 'Playfair Display', serif;
             color: var(--white);
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            letter-spacing: 0.01em;
         }
 
         .logo-text span {
             color: var(--gold);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
         .header-badge {
@@ -98,22 +121,21 @@
             color: var(--gold-light);
             background: rgba(201, 168, 76, 0.15);
             border: 1px solid rgba(201, 168, 76, 0.3);
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 100px;
-            letter-spacing: 0.03em;
         }
 
-        /* ── LAYOUT ── */
+        /* LAYOUT */
         .app-body {
             display: flex;
             flex: 1;
-            height: calc(100vh - 64px);
+            height: calc(100vh - 60px);
             overflow: hidden;
         }
 
-        /* ── SIDEBAR ── */
+        /* SIDEBAR */
         .sidebar {
-            width: 300px;
+            width: 270px;
             flex-shrink: 0;
             background: var(--white);
             border-right: 1px solid var(--border);
@@ -124,7 +146,7 @@
         }
 
         .sidebar-section {
-            padding: 1.25rem 1.25rem 0.5rem;
+            padding: 1rem 1rem 0.4rem;
         }
 
         .sidebar-label {
@@ -133,22 +155,21 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.6rem;
         }
 
         .topic-btn {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             width: 100%;
-            padding: 10px 12px;
+            padding: 8px 10px;
             border: none;
             background: transparent;
-            border-radius: 10px;
+            border-radius: 9px;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            font-weight: 400;
+            font-size: 13.5px;
             color: var(--text-dark);
             text-align: left;
             transition: all 0.15s;
@@ -157,75 +178,73 @@
 
         .topic-btn:hover {
             background: var(--cream);
-            color: var(--navy);
         }
 
         .topic-btn.active {
             background: rgba(11, 31, 58, 0.07);
             font-weight: 500;
-            color: var(--navy);
         }
 
-        .topic-btn .icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
+        .t-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 13px;
             flex-shrink: 0;
         }
 
-        .topic-btn .icon.blue {
+        .t-blue {
             background: #E8F0FE;
         }
 
-        .topic-btn .icon.green {
+        .t-green {
             background: #E6F4EA;
         }
 
-        .topic-btn .icon.amber {
+        .t-amber {
             background: #FEF7E0;
         }
 
-        .topic-btn .icon.red {
+        .t-red {
             background: #FCE8E6;
         }
 
-        .topic-btn .icon.purple {
+        .t-purple {
             background: #F3E8FD;
         }
 
-        .topic-btn .icon.teal {
+        .t-teal {
             background: #E0F2F1;
         }
 
         .sidebar-divider {
             height: 1px;
             background: var(--border);
-            margin: 0.75rem 1.25rem;
+            margin: 0.6rem 1rem;
         }
 
-        /* ── COUNTRY SELECT ── */
-        .country-select-wrap {
-            padding: 0 1.25rem;
+        /* COUNTRY */
+        .country-wrap {
+            padding: 0 1rem;
         }
 
         select {
             width: 100%;
-            padding: 9px 12px;
+            padding: 8px 10px;
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 9px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
+            font-size: 13.5px;
             color: var(--text-dark);
             background: var(--cream);
             cursor: pointer;
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A8FA8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 12px center;
+            background-position: right 10px center;
         }
 
         select:focus {
@@ -233,29 +252,28 @@
             border-color: var(--navy-light);
         }
 
-        /* ── MAIN CHAT ── */
+        /* MAIN */
         .main {
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            background: var(--cream);
         }
 
         .chat-area {
             flex: 1;
             overflow-y: auto;
-            padding: 2rem 2.5rem;
+            padding: 1.5rem 2rem;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.25rem;
         }
 
-        /* ── WELCOME ── */
+        /* WELCOME */
         .welcome-card {
             background: var(--navy);
             border-radius: var(--radius-lg);
-            padding: 2rem 2.5rem;
+            padding: 1.75rem 2rem;
             color: var(--white);
             position: relative;
             overflow: hidden;
@@ -264,49 +282,38 @@
         .welcome-card::before {
             content: '';
             position: absolute;
-            top: -60px;
-            right: -60px;
-            width: 200px;
-            height: 200px;
-            background: rgba(201, 168, 76, 0.12);
-            border-radius: 50%;
-        }
-
-        .welcome-card::after {
-            content: '';
-            position: absolute;
-            bottom: -40px;
-            right: 80px;
-            width: 120px;
-            height: 120px;
-            background: rgba(201, 168, 76, 0.07);
+            top: -50px;
+            right: -50px;
+            width: 180px;
+            height: 180px;
+            background: rgba(201, 168, 76, 0.1);
             border-radius: 50%;
         }
 
         .welcome-eyebrow {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.6rem;
         }
 
         .welcome-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.9rem;
+            font-size: 1.7rem;
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.6rem;
             position: relative;
             z-index: 1;
         }
 
         .welcome-desc {
-            font-size: 14px;
+            font-size: 13.5px;
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
-            max-width: 500px;
+            max-width: 480px;
             position: relative;
             z-index: 1;
         }
@@ -314,42 +321,86 @@
         .quick-prompts {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 1.25rem;
+            gap: 7px;
+            margin-top: 1rem;
             position: relative;
             z-index: 1;
         }
 
-        .quick-prompt-chip {
+        .qp-chip {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 100px;
-            padding: 6px 14px;
-            font-size: 13px;
+            padding: 5px 13px;
+            font-size: 12.5px;
             color: rgba(255, 255, 255, 0.85);
             cursor: pointer;
             transition: all 0.15s;
             font-family: 'DM Sans', sans-serif;
         }
 
-        .quick-prompt-chip:hover {
+        .qp-chip:hover {
             background: rgba(201, 168, 76, 0.25);
             border-color: rgba(201, 168, 76, 0.5);
             color: var(--gold-light);
         }
 
-        /* ── MESSAGES ── */
+        /* INFO GRID */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .info-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.9rem 1.1rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .info-card:hover {
+            border-color: var(--navy-light);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
+        }
+
+        .ic-icon {
+            font-size: 20px;
+            margin-bottom: 7px;
+        }
+
+        .ic-title {
+            font-weight: 600;
+            font-size: 13.5px;
+            color: var(--navy);
+            margin-bottom: 3px;
+        }
+
+        .ic-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* MESSAGES */
         .msg-row {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: flex-start;
-            animation: fadeUp 0.3s ease;
+            animation: fadeUp 0.25s ease;
+        }
+
+        .msg-row.user {
+            flex-direction: row-reverse;
         }
 
         @keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(8px);
+                transform: translateY(6px);
             }
 
             to {
@@ -358,19 +409,15 @@
             }
         }
 
-        .msg-row.user {
-            flex-direction: row-reverse;
-        }
-
         .avatar {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
         }
 
@@ -378,20 +425,20 @@
             background: var(--navy);
             color: var(--gold);
             font-family: 'Playfair Display', serif;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .avatar.user {
             background: var(--gold);
             color: var(--navy);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .bubble {
-            max-width: 72%;
-            padding: 13px 16px;
-            border-radius: 16px;
-            font-size: 14.5px;
+            max-width: 74%;
+            padding: 12px 15px;
+            border-radius: 15px;
+            font-size: 14px;
             line-height: 1.75;
         }
 
@@ -409,184 +456,79 @@
             border-top-right-radius: 4px;
         }
 
-        /* ── TIMELINE CARD ── */
-        .timeline-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
+        .bubble.ai strong {
+            color: var(--navy);
+            font-weight: 600;
         }
 
-        .timeline-card h3 {
+        .bubble.ai ul,
+        .bubble.ai ol {
+            padding-left: 1.2rem;
+            margin: 0.4rem 0;
+        }
+
+        .bubble.ai li {
+            margin-bottom: 3px;
+        }
+
+        .bubble.ai p {
+            margin-bottom: 0.45rem;
+        }
+
+        .bubble.ai p:last-child {
+            margin-bottom: 0;
+        }
+
+        .bubble.ai h4 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 0.95rem;
             color: var(--navy);
-            margin-bottom: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            margin: 0.6rem 0 0.35rem;
         }
 
-        .timeline-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .timeline-step {
-            display: flex;
-            gap: 16px;
-            position: relative;
-            padding-bottom: 20px;
-        }
-
-        .timeline-step:last-child {
-            padding-bottom: 0;
-        }
-
-        .step-line-col {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 24px;
-            flex-shrink: 0;
-        }
-
-        .step-dot {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 600;
-            flex-shrink: 0;
-            z-index: 1;
-        }
-
-        .step-dot.done {
-            background: var(--navy);
-            color: var(--white);
-        }
-
-        .step-dot.active {
-            background: var(--gold);
-            color: var(--navy);
-            box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.25);
-        }
-
-        .step-dot.upcoming {
-            background: var(--cream);
-            border: 2px solid var(--border);
-            color: var(--text-muted);
-        }
-
-        .step-connector {
-            flex: 1;
-            width: 2px;
-            background: var(--border);
-            margin: 2px 0;
-        }
-
-        .step-content {
-            padding-top: 2px;
-        }
-
-        .step-title {
-            font-weight: 500;
-            font-size: 14px;
-            color: var(--text-dark);
-        }
-
-        .step-desc {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 2px;
-            line-height: 1.5;
-        }
-
-        .step-timing {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--gold);
-            background: var(--gold-pale);
-            border-radius: 100px;
-            padding: 2px 9px;
+        .tag {
             display: inline-block;
-            margin-top: 5px;
-            letter-spacing: 0.02em;
-        }
-
-        /* ── INFO CARDS GRID ── */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .info-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1rem 1.25rem;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .info-card:hover {
-            border-color: var(--navy-light);
-            box-shadow: var(--shadow-sm);
-            transform: translateY(-1px);
-        }
-
-        .info-card-icon {
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
-
-        .info-card-title {
+            font-size: 11px;
             font-weight: 600;
-            font-size: 14px;
+            background: var(--gold-pale);
             color: var(--navy);
-            margin-bottom: 4px;
+            border-radius: 100px;
+            padding: 2px 8px;
+            margin: 2px 2px 2px 0;
         }
 
-        .info-card-desc {
-            font-size: 12.5px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* ── TYPING ── */
-        .typing-indicator {
+        /* TYPING */
+        .typing-row {
             display: flex;
-            gap: 4px;
-            align-items: center;
-            padding: 12px 16px;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .typing-bubble {
             background: var(--white);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 15px;
             border-top-left-radius: 4px;
-            width: fit-content;
+            padding: 12px 15px;
+            display: flex;
+            gap: 5px;
+            align-items: center;
         }
 
-        .typing-dot {
+        .td {
             width: 7px;
             height: 7px;
             border-radius: 50%;
             background: var(--text-muted);
-            animation: blink 1.2s infinite;
+            animation: blink 1.1s infinite;
         }
 
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
+        .td:nth-child(2) {
+            animation-delay: 0.18s;
         }
 
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
+        .td:nth-child(3) {
+            animation-delay: 0.36s;
         }
 
         @keyframes blink {
@@ -604,27 +546,162 @@
             }
         }
 
-        /* ── INPUT BAR ── */
+        /* TIMELINE */
+        .timeline-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.4rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .tl-steps {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tl-step {
+            display: flex;
+            gap: 14px;
+            position: relative;
+            padding-bottom: 18px;
+        }
+
+        .tl-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .tl-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 22px;
+            flex-shrink: 0;
+        }
+
+        .step-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .sd-done {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .sd-active {
+            background: var(--gold);
+            color: var(--navy);
+            box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.22);
+        }
+
+        .sd-up {
+            background: var(--cream);
+            border: 2px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .tl-line {
+            flex: 1;
+            width: 2px;
+            background: var(--border);
+            margin: 2px 0;
+        }
+
+        .tl-content {
+            padding-top: 2px;
+        }
+
+        .tl-title {
+            font-weight: 500;
+            font-size: 13.5px;
+            color: var(--text-dark);
+        }
+
+        .tl-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            line-height: 1.5;
+        }
+
+        .tl-time {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--gold);
+            background: var(--gold-pale);
+            border-radius: 100px;
+            padding: 2px 8px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        /* SUGGEST CHIPS */
+        .suggest-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .suggest-chip {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 5px 12px;
+            font-size: 12px;
+            color: var(--text-mid);
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .suggest-chip:hover {
+            background: var(--gold-pale);
+            border-color: var(--gold);
+            color: var(--navy);
+        }
+
+        /* INPUT */
         .input-bar {
-            padding: 1rem 2.5rem 1.5rem;
+            padding: 0.9rem 2rem 1.25rem;
             border-top: 1px solid var(--border);
             background: var(--cream);
         }
 
         .input-wrap {
             display: flex;
-            gap: 10px;
+            gap: 9px;
             align-items: flex-end;
             background: var(--white);
             border: 1.5px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 10px 12px 10px 16px;
+            padding: 9px 11px 9px 15px;
             transition: border-color 0.15s;
         }
 
         .input-wrap:focus-within {
             border-color: var(--navy-light);
-            box-shadow: 0 0 0 3px rgba(30, 58, 110, 0.1);
+            box-shadow: 0 0 0 3px rgba(30, 58, 110, 0.09);
         }
 
         textarea {
@@ -632,13 +709,13 @@
             border: none;
             background: transparent;
             font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
+            font-size: 14.5px;
             color: var(--text-dark);
             resize: none;
             outline: none;
             line-height: 1.5;
-            max-height: 120px;
-            min-height: 24px;
+            max-height: 110px;
+            min-height: 22px;
         }
 
         textarea::placeholder {
@@ -646,11 +723,11 @@
         }
 
         .send-btn {
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             background: var(--navy);
             border: none;
-            border-radius: 10px;
+            border-radius: 9px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -663,69 +740,21 @@
             background: var(--navy-light);
         }
 
-        .send-btn:disabled {
-            background: var(--border);
-            cursor: not-allowed;
-        }
-
         .send-btn svg {
             fill: var(--white);
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
         }
 
         .input-hint {
-            font-size: 12px;
+            font-size: 11.5px;
             color: var(--text-muted);
-            margin-top: 8px;
+            margin-top: 7px;
             text-align: center;
         }
 
-        /* ── RICH CONTENT ── */
-        .bubble.ai strong {
-            color: var(--navy);
-            font-weight: 600;
-        }
-
-        .bubble.ai ul,
-        .bubble.ai ol {
-            padding-left: 1.25rem;
-            margin: 0.5rem 0;
-        }
-
-        .bubble.ai li {
-            margin-bottom: 4px;
-        }
-
-        .bubble.ai p {
-            margin-bottom: 0.5rem;
-        }
-
-        .bubble.ai p:last-child {
-            margin-bottom: 0;
-        }
-
-        .bubble.ai h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            color: var(--navy);
-            margin: 0.75rem 0 0.4rem;
-        }
-
-        .bubble.ai code {
-            background: var(--cream);
-            border-radius: 4px;
-            padding: 1px 5px;
-            font-size: 13px;
-        }
-
-        /* ── SCROLLBAR ── */
         ::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
+            width: 4px;
         }
 
         ::-webkit-scrollbar-thumb {
@@ -740,22 +769,23 @@
     <header>
         <div class="logo">
             <div class="logo-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 24 24">
                     <path d="M2 20h20v2H2zM4 10h2v9H4zm7 0h2v9h-2zm7 0h2v9h-2zM2 6l10-5 10 5v3H2z" />
                 </svg>
             </div>
             <div class="logo-text">Civic<span>Guide</span></div>
         </div>
-        <div class="header-badge">AI Election Assistant</div>
+        <div class="header-right">
+            <div class="status-dot"></div>
+            <div class="header-badge">Election Assistant</div>
+        </div>
     </header>
 
     <div class="app-body">
-
-        <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="sidebar-section">
                 <div class="sidebar-label">Your Country</div>
-                <div class="country-select-wrap" style="padding: 0;">
+                <div class="country-wrap" style="padding:0;">
                     <select id="countrySelect">
                         <option value="US">🇺🇸 United States</option>
                         <option value="IN">🇮🇳 India</option>
@@ -766,307 +796,348 @@
                         <option value="FR">🇫🇷 France</option>
                         <option value="BR">🇧🇷 Brazil</option>
                         <option value="ZA">🇿🇦 South Africa</option>
-                        <option value="GEN">🌍 General / Other</option>
+                        <option value="GEN">🌍 General</option>
                     </select>
                 </div>
             </div>
-
             <div class="sidebar-divider"></div>
-
             <div class="sidebar-section">
                 <div class="sidebar-label">Quick Topics</div>
-
-                <button class="topic-btn" onclick="sendQuickTopic('How do I register to vote?')">
-                    <span class="icon blue">📋</span> Voter Registration
-                </button>
-                <button class="topic-btn" onclick="sendQuickTopic('Explain the election timeline and key dates')">
-                    <span class="icon amber">📅</span> Election Timeline
-                </button>
-                <button class="topic-btn" onclick="sendQuickTopic('How does voting work on election day?')">
-                    <span class="icon green">🗳️</span> How Voting Works
-                </button>
-                <button class="topic-btn" onclick="sendQuickTopic('What are the different types of elections?')">
-                    <span class="icon purple">🏛️</span> Types of Elections
-                </button>
-                <button class="topic-btn" onclick="sendQuickTopic('How are votes counted and results declared?')">
-                    <span class="icon teal">📊</span> Vote Counting
-                </button>
-                <button class="topic-btn" onclick="sendQuickTopic('What is the Electoral College?')">
-                    <span class="icon red">🗺️</span> Electoral Systems
-                </button>
+                <button class="topic-btn" onclick="ask('How do I register to vote?')"><span
+                        class="t-icon t-blue">📋</span>Voter Registration</button>
+                <button class="topic-btn" onclick="showTimeline()"><span class="t-icon t-amber">📅</span>Election
+                    Timeline</button>
+                <button class="topic-btn" onclick="ask('How does voting work on election day?')"><span
+                        class="t-icon t-green">🗳️</span>How Voting Works</button>
+                <button class="topic-btn" onclick="ask('What are the different types of elections?')"><span
+                        class="t-icon t-purple">🏛️</span>Types of Elections</button>
+                <button class="topic-btn" onclick="ask('How are votes counted and results declared?')"><span
+                        class="t-icon t-teal">📊</span>Vote Counting</button>
+                <button class="topic-btn" onclick="ask('What is the electoral system?')"><span
+                        class="t-icon t-red">🗺️</span>Electoral Systems</button>
             </div>
-
             <div class="sidebar-divider"></div>
-
             <div class="sidebar-section">
-                <div class="sidebar-label">Visual Guides</div>
-                <button class="topic-btn" onclick="showTimeline()">
-                    <span class="icon amber">⬛</span> Election Timeline
-                </button>
-                <button class="topic-btn" onclick="sendQuickTopic('What are my rights as a voter?')">
-                    <span class="icon green">⚖️</span> Voter Rights
-                </button>
-                <button class="topic-btn" onclick="sendQuickTopic('How to spot and avoid election misinformation?')">
-                    <span class="icon red">🛡️</span> Avoid Misinformation
-                </button>
+                <div class="sidebar-label">More Topics</div>
+                <button class="topic-btn" onclick="ask('What are my rights as a voter?')"><span
+                        class="t-icon t-green">⚖️</span>Voter Rights</button>
+                <button class="topic-btn" onclick="ask('Who can run for office and how?')"><span
+                        class="t-icon t-blue">🎯</span>Running for Office</button>
+                <button class="topic-btn" onclick="ask('How to spot election misinformation?')"><span
+                        class="t-icon t-red">🛡️</span>Avoid Misinformation</button>
+                <button class="topic-btn" onclick="ask('What is gerrymandering?')"><span
+                        class="t-icon t-purple">🗾</span>Gerrymandering</button>
+                <button class="topic-btn" onclick="ask('How does mail-in or absentee voting work?')"><span
+                        class="t-icon t-teal">✉️</span>Mail-in Voting</button>
             </div>
         </aside>
 
-        <!-- MAIN AREA -->
         <main class="main">
             <div class="chat-area" id="chatArea">
-
-                <!-- WELCOME -->
                 <div class="welcome-card">
                     <div class="welcome-eyebrow">Your civic companion</div>
                     <div class="welcome-title">Understand Elections,<br />Empower Your Vote</div>
-                    <div class="welcome-desc">Ask me anything about elections — registration, timelines, how voting
-                        works, electoral systems, and more. I'm here to make democracy easy to understand.</div>
+                    <div class="welcome-desc">Ask me anything about elections — registration, timelines, voting,
+                        electoral systems, and more. No internet required.</div>
                     <div class="quick-prompts">
-                        <button class="quick-prompt-chip" onclick="sendQuickTopic('How do I register to vote?')">How do
-                            I register to vote?</button>
-                        <button class="quick-prompt-chip"
-                            onclick="sendQuickTopic('Walk me through election day step by step')">Walk me through
-                            election day</button>
-                        <button class="quick-prompt-chip"
-                            onclick="sendQuickTopic('What happens after voting ends?')">What happens after
+                        <button class="qp-chip" onclick="ask('How do I register to vote?')">How do I register?</button>
+                        <button class="qp-chip" onclick="ask('Walk me through election day step by step')">Walk me
+                            through election day</button>
+                        <button class="qp-chip" onclick="ask('What happens after voting ends?')">What happens after
                             voting?</button>
-                        <button class="quick-prompt-chip" onclick="showTimeline()">Show election timeline</button>
+                        <button class="qp-chip" onclick="showTimeline()">Show election timeline</button>
+                        <button class="qp-chip"
+                            onclick="ask('What is the difference between first past the post and proportional representation?')">Voting
+                            systems explained</button>
                     </div>
                 </div>
 
-                <!-- INFO GRID -->
                 <div class="info-grid">
                     <div class="info-card"
-                        onclick="sendQuickTopic('How does voter registration work and what documents do I need?')">
-                        <div class="info-card-icon">📋</div>
-                        <div class="info-card-title">Register to Vote</div>
-                        <div class="info-card-desc">Eligibility, documents needed, deadlines & online options</div>
+                        onclick="ask('How does voter registration work and what documents do I need?')">
+                        <div class="ic-icon">📋</div>
+                        <div class="ic-title">Register to Vote</div>
+                        <div class="ic-desc">Eligibility, documents, deadlines & online options</div>
                     </div>
                     <div class="info-card"
-                        onclick="sendQuickTopic('Explain the full election process from candidates to results')">
-                        <div class="info-card-icon">🏛️</div>
-                        <div class="info-card-title">The Full Process</div>
-                        <div class="info-card-desc">From candidacy filing to final results announced</div>
+                        onclick="ask('Explain the full election process from candidates filing to results')">
+                        <div class="ic-icon">🏛️</div>
+                        <div class="ic-title">The Full Process</div>
+                        <div class="ic-desc">From candidacy filing to final results</div>
                     </div>
-                    <div class="info-card" onclick="sendQuickTopic('What are the different ways I can cast my vote?')">
-                        <div class="info-card-icon">🗳️</div>
-                        <div class="info-card-title">Ways to Vote</div>
-                        <div class="info-card-desc">In-person, mail-in, absentee & early voting explained</div>
+                    <div class="info-card" onclick="ask('What are the different ways I can cast my vote?')">
+                        <div class="ic-icon">🗳️</div>
+                        <div class="ic-title">Ways to Vote</div>
+                        <div class="ic-desc">In-person, mail-in, absentee & early voting</div>
                     </div>
-                    <div class="info-card" onclick="sendQuickTopic('How are election results verified and certified?')">
-                        <div class="info-card-icon">✅</div>
-                        <div class="info-card-title">Results & Certification</div>
-                        <div class="info-card-desc">Counting, auditing, certification & inauguration</div>
+                    <div class="info-card" onclick="ask('How are election results verified and certified?')">
+                        <div class="ic-icon">✅</div>
+                        <div class="ic-title">Results & Certification</div>
+                        <div class="ic-desc">Counting, auditing, certification & inauguration</div>
                     </div>
                 </div>
-
             </div>
 
-            <!-- INPUT BAR -->
             <div class="input-bar">
                 <div class="input-wrap">
                     <textarea id="userInput" placeholder="Ask anything about elections…" rows="1"
                         onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                    <button class="send-btn" onclick="sendMessage()">
                         <svg viewBox="0 0 24 24">
                             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
                         </svg>
                     </button>
                 </div>
-                <div class="input-hint">Powered by Claude AI · Select your country in the sidebar for tailored answers
+                <div class="input-hint">Fully offline · Select your country for tailored answers · Built with CivicGuide
                 </div>
             </div>
         </main>
     </div>
 
     <script>
-        const COUNTRY_NAMES = {
-            US: 'United States', IN: 'India', UK: 'United Kingdom',
-            CA: 'Canada', AU: 'Australia', DE: 'Germany',
-            FR: 'France', BR: 'Brazil', ZA: 'South Africa', GEN: 'General'
-        };
+        // ─────────────────────────────────────────────
+        // KNOWLEDGE BASE — All responses built-in
+        // ─────────────────────────────────────────────
+        const COUNTRY_NAMES = { US: 'United States', IN: 'India', UK: 'United Kingdom', CA: 'Canada', AU: 'Australia', DE: 'Germany', FR: 'France', BR: 'Brazil', ZA: 'South Africa', GEN: 'General' };
 
-        let conversationHistory = [];
-        let isLoading = false;
-
-        function getSelectedCountry() {
-            const sel = document.getElementById('countrySelect');
-            return COUNTRY_NAMES[sel.value] || 'General';
-        }
-
-        function autoResize(el) {
-            el.style.height = 'auto';
-            el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-        }
-
-        function handleKey(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
+        const COUNTRY_DATA = {
+            US: {
+                register: `<h4>Voter Registration — United States</h4><p>In the US, you must register to vote before most elections. Here's how:</p><ul><li><strong>Eligibility:</strong> US citizen, 18+ on election day, resident of your state</li><li><strong>Online:</strong> Use <strong>vote.gov</strong> — most states support online registration</li><li><strong>Deadline:</strong> Typically 15–30 days before election day (varies by state)</li><li><strong>Same-day registration:</strong> Available in about 21 states</li><li><strong>Documents needed:</strong> Driver's license, state ID, or last 4 digits of SSN</li></ul><p>You can also register by mail or in person at DMVs, libraries, and government offices.</p>`,
+                system: `<h4>Electoral System — United States</h4><p>The US uses a <strong>First-Past-the-Post (FPTP)</strong> system, also called "winner-takes-all." The candidate with the most votes in a district wins, even without a majority.</p><h4>The Electoral College</h4><p>For presidential elections, voters don't directly elect the president. They vote for <strong>electors</strong> who represent their state. Each state gets electors equal to its Congressional seats. A candidate needs <strong>270 of 538 electoral votes</strong> to win.</p><ul><li><strong>Winner-takes-all:</strong> In 48 states, whoever wins the state gets all its electoral votes</li><li><strong>Maine & Nebraska</strong> split their electors by congressional district</li></ul>`,
+                election_day: `<h4>Election Day — United States</h4><p>Federal elections are held on the <strong>first Tuesday after the first Monday in November</strong>.</p><ul><li><strong>Polling hours:</strong> Vary by state, typically 6am–8pm</li><li><strong>What to bring:</strong> Photo ID (required in most states)</li><li><strong>Find your polling place:</strong> vote.gov or your county election website</li><li><strong>Early voting:</strong> Available in most states, 1–3 weeks before election day</li><li><strong>Mail-in ballots:</strong> Available in all states; some states mail ballots automatically</li></ul><p>If the line is long when polls close, you still have the right to vote if you're already in line.</p>`,
+            },
+            IN: {
+                register: `<h4>Voter Registration — India</h4><p>India's elections are managed by the <strong>Election Commission of India (ECI)</strong>. Here's how to register:</p><ul><li><strong>Eligibility:</strong> Indian citizen, 18+ on January 1 of the qualifying year</li><li><strong>Online:</strong> Register at <strong>voters.eci.gov.in</strong> using Form 6</li><li><strong>Voter ID (EPIC):</strong> You'll receive an Elector's Photo Identity Card</li><li><strong>Documents needed:</strong> Aadhaar card, proof of age, proof of address</li><li><strong>Deadline:</strong> Applications accepted year-round; roll revisions happen annually</li></ul><p>You can also link your Aadhaar to your voter ID for seamless verification at booths.</p>`,
+                system: `<h4>Electoral System — India</h4><p>India uses a <strong>First-Past-the-Post (FPTP)</strong> system for Lok Sabha and state elections. The candidate with the most votes in a constituency wins the seat.</p><h4>Key Bodies</h4><ul><li><strong>Lok Sabha:</strong> 543 elected seats — lower house of Parliament</li><li><strong>Rajya Sabha:</strong> Upper house, members elected by state legislatures</li><li><strong>State Assemblies (Vidhan Sabha):</strong> Each state has its own elected legislature</li></ul><p>The party or coalition that wins a majority (272+ seats) forms the government. The <strong>President</strong> is the constitutional head, while the <strong>Prime Minister</strong> is the head of government.</p>`,
+                election_day: `<h4>Election Day — India</h4><p>General elections (Lok Sabha) occur every 5 years, typically spread over <strong>multiple phases</strong> across different states to manage the massive scale.</p><ul><li><strong>Polling hours:</strong> Usually 7am–6pm</li><li><strong>Voter Verified Paper Audit Trail (VVPAT):</strong> Used alongside Electronic Voting Machines (EVMs) for transparency</li><li><strong>What to bring:</strong> Voter ID card (EPIC) or 12 approved alternative documents</li><li><strong>Booth slips:</strong> Provided by political parties or election office</li><li><strong>Model Code of Conduct:</strong> Kicks in when elections are announced — restricts government announcements</li></ul>`,
+            },
+            UK: {
+                register: `<h4>Voter Registration — United Kingdom</h4><p>Registering to vote in the UK is straightforward:</p><ul><li><strong>Eligibility:</strong> British, Irish, or qualifying Commonwealth citizen; 16+ (to register); 18+ to vote in most elections</li><li><strong>Online:</strong> <strong>gov.uk/register-to-vote</strong> — takes about 5 minutes</li><li><strong>Deadline:</strong> 12 working days before election day</li><li><strong>Documents needed:</strong> National Insurance number and date of birth</li><li><strong>Automatic registration:</strong> Not automatic — you must register yourself</li></ul><p>Scotland and Wales allow 16-year-olds to vote in devolved elections.</p>`,
+                system: `<h4>Electoral System — United Kingdom</h4><p>The UK uses <strong>First-Past-the-Post (FPTP)</strong> for General Elections to the House of Commons. The 650 MPs each represent a single constituency.</p><ul><li><strong>The party</strong> that wins a majority of seats (326+) forms the government</li><li><strong>Coalition:</strong> If no majority, parties may form a coalition</li><li><strong>Devolved elections</strong> (Scotland, Wales, N. Ireland) use proportional systems</li><li><strong>House of Lords:</strong> Unelected upper chamber</li></ul><p>The <strong>Prime Minister</strong> is the leader of the party commanding a Commons majority, appointed by the King/Queen.</p>`,
+                election_day: `<h4>Election Day — United Kingdom</h4><p>UK General Elections have no fixed date but must occur at least every <strong>5 years</strong> (now effectively 5 years under the Dissolution and Calling of Parliament Act 2022).</p><ul><li><strong>Polling hours:</strong> 7am–10pm</li><li><strong>What to bring:</strong> Photo ID is now required (introduced 2023)</li><li><strong>Polling card:</strong> Sent to your address but not required to vote</li><li><strong>Postal voting:</strong> Apply at least 11 working days before election</li><li><strong>Proxy voting:</strong> Someone can vote on your behalf if you can't attend</li></ul>`,
+            },
+            CA: {
+                register: `<h4>Voter Registration — Canada</h4><p>Elections Canada manages federal voter registration:</p><ul><li><strong>Eligibility:</strong> Canadian citizen, 18+ on election day</li><li><strong>Automatic registration:</strong> Most citizens are registered automatically via tax returns and other government data</li><li><strong>Check/update:</strong> elections.ca — confirm your registration</li><li><strong>Election day registration:</strong> You can register at your polling station on election day</li><li><strong>Documents:</strong> Proof of identity and address (driver's license or two pieces of ID)</li></ul>`,
+                system: `<h4>Electoral System — Canada</h4><p>Canada uses <strong>First-Past-the-Post (FPTP)</strong> for federal elections. The country is divided into 338 ridings (constituencies), each electing one MP.</p><ul><li><strong>Party with most seats</strong> typically forms government</li><li><strong>Majority:</strong> 170+ seats; <strong>Minority:</strong> fewer seats but still most</li><li><strong>The Governor General</strong> is the constitutional head; the <strong>Prime Minister</strong> leads the government</li><li><strong>Provincial elections</strong> use the same FPTP system</li></ul>`,
+                election_day: `<h4>Election Day — Canada</h4><p>Federal elections occur on fixed dates (third Monday in October, every 4 years) or when Parliament is dissolved.</p><ul><li><strong>Polling hours:</strong> Staggered across time zones so results release together nationally</li><li><strong>What to bring:</strong> Voter information card + one piece of ID, or two pieces of ID</li><li><strong>Advance polls:</strong> Open 10 days before election day</li><li><strong>Voting by mail:</strong> Special ballot available for any reason</li></ul>`,
+            },
+            AU: {
+                register: `<h4>Voter Registration — Australia</h4><p>Australia has <strong>compulsory enrollment</strong> for citizens:</p><ul><li><strong>Eligibility:</strong> Australian citizen, 18+ (enroll at 16 to be ready)</li><li><strong>Required by law:</strong> Failure to enroll can result in a fine</li><li><strong>Online:</strong> aec.gov.au — enroll or update details</li><li><strong>Deadline:</strong> Rolls close 7 days after an election is called</li><li><strong>Documents:</strong> Australian citizenship, date of birth, address</li></ul>`,
+                system: `<h4>Electoral System — Australia</h4><p>Australia uses a <strong>preferential voting</strong> system (Alternative Vote) for the House of Representatives — voters rank candidates 1, 2, 3… If no candidate gets 50%+, the lowest-ranked candidate is eliminated and their votes redistributed.</p><ul><li><strong>Senate:</strong> Uses proportional representation (STV) — multi-member electorates</li><li><strong>Voting is compulsory</strong> — fines for not voting</li><li><strong>151 seats</strong> in the House; government needs 76 to form majority</li></ul>`,
+                election_day: `<h4>Election Day — Australia</h4><p>Federal elections must be held at least every 3 years. Voting is <strong>compulsory</strong> for all enrolled citizens.</p><ul><li><strong>Polling hours:</strong> 8am–6pm</li><li><strong>Pencils provided</strong> at booths (you can bring your own pen)</li><li><strong>Democracy sausage:</strong> Many polling places run sausage sizzle fundraisers!</li><li><strong>Postal voting:</strong> Apply before close of rolls</li><li><strong>Pre-poll voting:</strong> Available up to 3 weeks before election day</li></ul>`,
+            },
+            GEN: {
+                register: `<h4>Voter Registration — General</h4><p>Voter registration is the process of adding your name to the official electoral roll so you can participate in elections.</p><ul><li><strong>Eligibility:</strong> Usually citizenship + minimum age (commonly 18) + residency</li><li><strong>How to register:</strong> Online portals, government offices, by mail, or in person</li><li><strong>Documents needed:</strong> Proof of identity and address</li><li><strong>Deadlines:</strong> Most countries have a cutoff date before election day</li><li><strong>Some countries</strong> (Australia, Brazil) have compulsory registration or voting</li></ul><p>Select your country from the sidebar for specific registration instructions!</p>`,
+                system: `<h4>Electoral Systems — Overview</h4><p>Different countries use different systems to convert votes into seats or power:</p><ul><li><strong>First-Past-the-Post (FPTP):</strong> Most votes wins. Simple but can produce unrepresentative results. Used in: US, UK, India, Canada</li><li><strong>Proportional Representation (PR):</strong> Seats match vote share. More representative. Used in: Germany, South Africa, Netherlands</li><li><strong>Preferential/Ranked Choice:</strong> Voters rank candidates. Ensures winner has broad support. Used in: Australia, Ireland</li><li><strong>Two-Round System:</strong> Top two candidates go to a runoff if no majority. Used in: France, Brazil</li><li><strong>Mixed Systems:</strong> Combine FPTP + PR. Used in: Germany (MMP), Japan</li></ul>`,
+                election_day: `<h4>Election Day — General</h4><p>Election day is when citizens cast their votes. Here's what typically happens:</p><ul><li><strong>Polling stations open</strong> in the morning (often 6–8am) and close in the evening</li><li><strong>Bring your ID</strong> or voter registration card</li><li><strong>Ballot is secret</strong> — no one can see how you vote</li><li><strong>If you're in line</strong> when polls close, you still have the right to vote</li><li><strong>Assistance:</strong> Voters with disabilities have the right to support</li><li><strong>After voting:</strong> You may receive an "I Voted" sticker or ink mark on your finger</li></ul>`,
             }
+        };
+        // Fill missing countries with GEN fallback
+        ['DE', 'FR', 'BR', 'ZA'].forEach(c => { COUNTRY_DATA[c] = COUNTRY_DATA.GEN; });
+
+        // ─────────────────────────────────────────────
+        // KNOWLEDGE ENGINE
+        // ─────────────────────────────────────────────
+        const KB = [
+            {
+                keys: ['register', 'registration', 'enroll', 'sign up', 'how to vote', 'eligible', 'eligib', 'voter id', 'voter card', 'aadhaar', 'epic'],
+                fn: (c) => countryData(c, 'register'),
+                suggest: ['What documents do I need?', 'What is the registration deadline?', 'Can I register on election day?']
+            },
+            {
+                keys: ['electoral college', 'electoral system', 'how elections work', 'fptp', 'first past', 'proportional', 'ranked choice', 'preferential', 'two round', 'runoff', 'voting system', 'how does voting work', 'system of voting'],
+                fn: (c) => countryData(c, 'system'),
+                suggest: ['What is gerrymandering?', 'How are seats allocated?', 'What is a hung parliament?']
+            },
+            {
+                keys: ['election day', 'polling', 'polling station', 'polling place', 'booth', 'how to vote on', 'what to bring', 'id to vote'],
+                fn: (c) => countryData(c, 'election_day'),
+                suggest: ['What is early voting?', 'How does mail-in voting work?', 'What happens if I miss election day?']
+            },
+            {
+                keys: ['mail', 'absentee', 'postal vote', 'vote by mail', 'remote voting'],
+                ans: `<h4>Mail-in & Absentee Voting</h4><p>Mail-in voting lets you cast your ballot without going to a polling station. Here's how it generally works:</p><ul><li><strong>Request a ballot:</strong> Apply online or by mail, usually weeks before election day</li><li><strong>Receive your ballot:</strong> Sent to your registered address</li><li><strong>Complete & return:</strong> Fill it out, sign the envelope, and return by the deadline</li><li><strong>Deadline:</strong> Must be <em>received</em> by election day (or shortly after, depending on country)</li><li><strong>Tracking:</strong> Many systems let you track your ballot online</li></ul><p>Absentee voting is similar — originally for people away from home, now widely available for any reason in many countries.</p>`,
+                suggest: ['How do I request a mail-in ballot?', 'Is mail-in voting secure?', 'What is early voting?']
+            },
+            {
+                keys: ['count', 'counting', 'how votes are counted', 'results', 'declare', 'tally', 'announce', 'projection', 'exit poll'],
+                ans: `<h4>How Votes Are Counted & Results Declared</h4><p>After polls close, a carefully managed process begins:</p><ol><li><strong>Polls close</strong> — No more votes accepted; ballot boxes sealed</li><li><strong>Transport:</strong> Boxes moved to counting centers under supervision</li><li><strong>Opening & sorting:</strong> Ballots opened, sorted by candidate/party</li><li><strong>Counting:</strong> Manual count, machine count, or both — with observers from all parties present</li><li><strong>Preliminary results:</strong> Announced as counting progresses</li><li><strong>Official results:</strong> Declared by the election authority after all counts verified</li><li><strong>Certification:</strong> Formal legal certification of results</li><li><strong>Recounts:</strong> Triggered if margins are very small (usually under 0.5%)</li></ol>`,
+                suggest: ['What is a recount?', 'How long does counting take?', 'How are results certified?']
+            },
+            {
+                keys: ['certif', 'inaugurate', 'inauguration', 'swear in', 'oath', 'transition', 'transfer of power'],
+                ans: `<h4>Certification & Inauguration</h4><p>After election results are announced, several official steps follow:</p><ul><li><strong>Canvassing:</strong> Local election boards verify and certify their results</li><li><strong>State/national certification:</strong> The official governing body formally certifies the winner</li><li><strong>Legal challenges:</strong> Losing candidates may contest in court within a set timeframe</li><li><strong>Transition period:</strong> The incoming government prepares to take office</li><li><strong>Inauguration:</strong> The elected official is sworn in — in the US this is January 20; in India the PM is sworn in within days of results</li></ul>`,
+                suggest: ['What happens during a recount?', 'How long is the transition period?', 'What is a concession speech?']
+            },
+            {
+                keys: ['types of election', 'different elections', 'local election', 'state election', 'national election', 'midterm', 'by-election', 'referendum', 'plebiscite', 'primary', 'caucus'],
+                ans: `<h4>Types of Elections</h4><p>Elections take many forms depending on the level of government and purpose:</p><ul><li><strong>General Elections:</strong> National elections to choose the central government or legislature</li><li><strong>State / Provincial Elections:</strong> Choose regional governments</li><li><strong>Local Elections:</strong> Elect mayors, city councils, school boards</li><li><strong>Primary Elections:</strong> Held within a party to choose their candidate (common in US)</li><li><strong>By-elections (Special elections):</strong> Held to fill a single vacant seat mid-term</li><li><strong>Midterm Elections:</strong> US elections held halfway through a presidential term</li><li><strong>Referendums/Plebiscites:</strong> Public votes on a specific policy question (e.g., Brexit)</li><li><strong>Runoff Elections:</strong> Second round if no candidate wins a majority</li></ul>`,
+                suggest: ['What is a primary election?', 'What is a referendum?', 'What is a by-election?']
+            },
+            {
+                keys: ['rights', 'voter rights', 'right to vote', 'discrimination', 'accessibility', 'disability', 'assistance', 'secret ballot', 'secret vote'],
+                ans: `<h4>Your Rights as a Voter</h4><p>Democratic elections guarantee voters a set of fundamental rights:</p><ul><li><strong>Secret ballot:</strong> No one can see how you voted — it is legally protected</li><li><strong>Non-discrimination:</strong> You cannot be turned away based on race, gender, religion, or ethnicity</li><li><strong>Accessibility:</strong> Polling stations must accommodate voters with disabilities</li><li><strong>Assistance:</strong> You may bring a helper if you have a disability or language barrier</li><li><strong>Right to complain:</strong> If denied your vote, you can file a provisional/tendered ballot and challenge the decision</li><li><strong>Time off work:</strong> Many countries require employers to give paid time off to vote</li><li><strong>Observer rights:</strong> Parties and civil society can send observers to watch the counting</li></ul>`,
+                suggest: ['What is a provisional ballot?', 'What if I am denied my right to vote?', 'What is voter suppression?']
+            },
+            {
+                keys: ['candidate', 'run for office', 'how to run', 'candidacy', 'filing', 'nomination', 'campaign', 'party nomination'],
+                ans: `<h4>Running for Office</h4><p>The process of becoming a candidate varies by country and office, but generally involves:</p><ol><li><strong>Eligibility check:</strong> Meet age, citizenship, and residency requirements</li><li><strong>Party nomination:</strong> Win your party's primary/selection process, or run as an independent</li><li><strong>File nomination papers:</strong> Submit forms and often a deposit or petition signatures to the election authority</li><li><strong>Campaigning period:</strong> Allowed to campaign once officially listed as a candidate</li><li><strong>Campaign finance rules:</strong> Limits on spending and required disclosure of donors</li><li><strong>Debates:</strong> Optional but standard in most democracies</li></ol><p>In India, candidates file nominations with the Returning Officer. In the US, candidates file with the FEC and state authorities.</p>`,
+                suggest: ['What is a political party?', 'How does campaign finance work?', 'What is an independent candidate?']
+            },
+            {
+                keys: ['gerrymander', 'gerrymandering', 'redraw', 'redistrict', 'constituency boundary', 'malapportionment'],
+                ans: `<h4>Gerrymandering</h4><p>Gerrymandering is the manipulation of electoral district boundaries to give one political party an unfair advantage.</p><h4>How it works</h4><ul><li><strong>Packing:</strong> Cramming opposition voters into one district so they "waste" votes on lopsided wins</li><li><strong>Cracking:</strong> Splitting opposition voters across many districts so they never form a majority anywhere</li></ul><h4>Real impact</h4><p>A party can win fewer total votes statewide but still win more seats. This undermines the principle that votes should count equally.</p><h4>Counters</h4><ul><li>Independent redistricting commissions (used in some US states)</li><li>Proportional representation systems are naturally resistant to gerrymandering</li><li>Court challenges</li></ul>`,
+                suggest: ['What is redistricting?', 'How does proportional representation prevent gerrymandering?', 'What is a swing district?']
+            },
+            {
+                keys: ['misinformation', 'fake news', 'disinformation', 'rumor', 'propaganda', 'deep fake', 'false', 'hoax', 'fact check'],
+                ans: `<h4>Spotting Election Misinformation</h4><p>During elections, false information spreads fast. Here's how to protect yourself:</p><ul><li><strong>Check the source:</strong> Is it an official government or news outlet? Look for bylines and editorial standards</li><li><strong>Look for dates:</strong> Old news often circulates as current — always check the publication date</li><li><strong>Reverse image search:</strong> Check if photos are taken out of context</li><li><strong>Verify with fact-checkers:</strong> FactCheck.org, Snopes, BBC Reality Check, AltNews (India), Full Fact (UK)</li><li><strong>Primary sources:</strong> Go directly to the election commission website for official information</li><li><strong>Be skeptical of outrage:</strong> Content designed to make you angry or scared is often misleading</li><li><strong>Don't share unverified content</strong> — even sharing to debunk it can spread it further</li></ul>`,
+                suggest: ['What are reliable election information sources?', 'What is deep fake?', 'How do I report election misinformation?']
+            },
+            {
+                keys: ['hung parliament', 'coalition', 'minority government', 'majority', 'supermajority', 'mandate'],
+                ans: `<h4>Hung Parliament & Coalition Governments</h4><p>When no single party wins an outright majority of seats, a <strong>hung parliament</strong> (or hung assembly) results.</p><h4>What happens next?</h4><ul><li><strong>Coalition government:</strong> Two or more parties agree to govern together, sharing cabinet positions</li><li><strong>Confidence & supply:</strong> A minority government survives with support from smaller parties on key votes</li><li><strong>Negotiations:</strong> Can take days or weeks (e.g., Germany's coalition talks often last months)</li><li><strong>Another election:</strong> If no majority can be formed, a fresh election may be called</li></ul><p>Examples: UK 2010 (Conservative-Liberal Democrat coalition); India regularly forms multi-party coalitions (NDA, INDIA alliance).</p>`,
+                suggest: ['What is a confidence vote?', 'How does coalition negotiation work?', 'What is a minority government?']
+            },
+            {
+                keys: ['early voting', 'advance poll', 'vote early', 'before election day'],
+                ans: `<h4>Early Voting</h4><p>Early voting lets eligible voters cast their ballot before official election day, reducing queues and increasing participation.</p><ul><li><strong>US:</strong> Available in most states, typically 7–45 days before election day</li><li><strong>Canada:</strong> Advance polls open 10 days before election day</li><li><strong>Australia:</strong> Pre-poll voting available up to 3 weeks early</li><li><strong>UK:</strong> Postal voting serves as the early voting mechanism</li><li><strong>India:</strong> Generally no early voting — all voting happens on designated polling days per phase</li></ul><p>Early voting is especially useful for people who work on election day, have health issues, or travel frequently.</p>`,
+                suggest: ['How does mail-in voting work?', 'What is same-day registration?', 'Can I change my vote after voting early?']
+            },
+            {
+                keys: ['recount', 'audit', 'close race', 'contested', 'disputed', 'challenge', 'court'],
+                ans: `<h4>Recounts & Disputed Elections</h4><p>When results are very close or irregularities are alleged, a recount or audit may be triggered.</p><h4>Types of recounts</h4><ul><li><strong>Automatic recount:</strong> Triggered if the margin is below a threshold (e.g., 0.5% in many US states)</li><li><strong>Requested recount:</strong> A candidate can formally request one, sometimes paying a fee</li><li><strong>Manual recount:</strong> Humans re-examine every ballot</li><li><strong>Machine recount:</strong> Ballots run through counting machines again</li><li><strong>Audit:</strong> Statistical check of a random sample of ballots to verify accuracy</li></ul><h4>Legal challenges</h4><p>Candidates can file lawsuits contesting results. Courts evaluate whether legal procedures were followed correctly — they don't re-run elections lightly.</p>`,
+                suggest: ['What is an election audit?', 'How long can a recount take?', 'What happens if results are overturned?']
+            },
+            {
+                keys: ['timeline', 'process', 'steps', 'how elections work', 'overview', 'explain elections', 'what is an election'],
+                fn: () => null, // handled by showTimeline
+                special: 'timeline',
+                suggest: ['Show me the full election timeline', 'What happens on election day?', 'How long does the whole process take?']
+            },
+            {
+                keys: ['thank', 'hello', 'hi', 'hey', 'good', 'great', 'help', 'what can you', 'what do you', 'who are you'],
+                ans: `<p>Hello! I'm <strong>CivicGuide</strong>, your election education assistant. I'm here to help you understand how democracy works — from voter registration to election results.</p><p>I can explain:</p><ul><li>📋 How to register to vote</li><li>🗳️ What happens on election day</li><li>📊 How votes are counted</li><li>🏛️ Electoral systems (FPTP, PR, preferential voting)</li><li>⚖️ Your rights as a voter</li><li>🛡️ How to spot misinformation</li><li>And much more!</li></ul><p>Select your country from the sidebar and ask me anything.</p>`,
+                suggest: ['How do I register to vote?', 'Show me the election timeline', 'What are my voter rights?']
+            }
+        ];
+
+        function countryData(c, key) {
+            const d = COUNTRY_DATA[c] || COUNTRY_DATA['GEN'];
+            return d[key] || COUNTRY_DATA['GEN'][key];
         }
 
-        function scrollToBottom() {
-            const ca = document.getElementById('chatArea');
-            ca.scrollTop = ca.scrollHeight;
+        function getCountry() {
+            return document.getElementById('countrySelect').value;
         }
 
-        function addMessage(role, html) {
+        function getResponse(input) {
+            const q = input.toLowerCase();
+            for (const item of KB) {
+                const hit = item.keys.some(k => q.includes(k));
+                if (!hit) continue;
+                if (item.special === 'timeline') return { special: 'timeline', suggest: item.suggest };
+                if (item.fn) return { html: item.fn(getCountry()), suggest: item.suggest || [] };
+                if (item.ans) return { html: item.ans, suggest: item.suggest || [] };
+            }
+            // fallback
+            return {
+                html: `<p>That's a great question about elections! I have built-in knowledge on these topics — try asking about:</p><ul><li><strong>Voter registration</strong> — how to sign up, deadlines, documents</li><li><strong>Election day</strong> — what to bring, polling hours, your rights</li><li><strong>Vote counting</strong> — how results are tallied and certified</li><li><strong>Electoral systems</strong> — FPTP, proportional representation, ranked choice</li><li><strong>Misinformation</strong> — how to spot false election claims</li><li><strong>Gerrymandering</strong> — how district lines affect election outcomes</li></ul><p>Or click a topic in the sidebar to get started!</p>`,
+                suggest: ['How do I register to vote?', 'What happens on election day?', 'How are votes counted?']
+            };
+        }
+
+        // ─────────────────────────────────────────────
+        // UI FUNCTIONS
+        // ─────────────────────────────────────────────
+        function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 110) + 'px'; }
+        function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
+        function scrollBottom() { const ca = document.getElementById('chatArea'); ca.scrollTop = ca.scrollHeight; }
+
+        function addMsg(role, html, suggests) {
             const ca = document.getElementById('chatArea');
             const isUser = role === 'user';
             const row = document.createElement('div');
             row.className = 'msg-row' + (isUser ? ' user' : '');
+            let suggestHTML = '';
+            if (suggests && suggests.length) {
+                suggestHTML = `<div class="suggest-row">${suggests.map(s => `<button class="suggest-chip" onclick="ask('${s.replace(/'/g, "\\'")}')">↗ ${s}</button>`).join('')}</div>`;
+            }
             row.innerHTML = `
     <div class="avatar ${isUser ? 'user' : 'ai'}">${isUser ? 'You' : 'C'}</div>
-    <div class="bubble ${isUser ? 'user' : 'ai'}">${html}</div>
-  `;
+    <div>
+      <div class="bubble ${isUser ? 'user' : 'ai'}">${html}</div>
+      ${suggestHTML}
+    </div>`;
             ca.appendChild(row);
-            scrollToBottom();
-            return row;
+            scrollBottom();
         }
 
         function showTyping() {
             const ca = document.getElementById('chatArea');
             const row = document.createElement('div');
-            row.className = 'msg-row';
-            row.id = 'typingRow';
-            row.innerHTML = `
-    <div class="avatar ai">C</div>
-    <div class="typing-indicator">
-      <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
-    </div>
-  `;
-            ca.appendChild(row);
-            scrollToBottom();
+            row.className = 'typing-row'; row.id = 'typingRow';
+            row.innerHTML = `<div class="avatar ai">C</div><div class="typing-bubble"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+            ca.appendChild(row); scrollBottom();
         }
-
-        function hideTyping() {
-            const el = document.getElementById('typingRow');
-            if (el) el.remove();
-        }
-
-        function formatResponse(text) {
-            return text
-                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.+?)\*/g, '<em>$1</em>')
-                .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
-                .replace(/^### (.+)$/gm, '<h4>$1</h4>')
-                .replace(/^## (.+)$/gm, '<h4>$1</h4>')
-                .replace(/^- (.+)$/gm, '<li>$1</li>')
-                .replace(/(<li>[\s\S]+?<\/li>)/g, '<ul>$1</ul>')
-                .replace(/<\/ul>\s*<ul>/g, '')
-                .replace(/\n\n/g, '</p><p>')
-                .replace(/\n/g, '<br/>')
-                .replace(/^(.+)$/, '<p>$1</p>');
-        }
-
-        async function sendMessage(overrideText) {
-            if (isLoading) return;
-            const input = document.getElementById('userInput');
-            const text = overrideText || input.value.trim();
-            if (!text) return;
-
-            input.value = '';
-            input.style.height = 'auto';
-            isLoading = true;
-            document.getElementById('sendBtn').disabled = true;
-
-            addMessage('user', text);
-            conversationHistory.push({ role: 'user', content: text });
-
-            showTyping();
-
-            const country = getSelectedCountry();
-            const systemPrompt = `You are CivicGuide, a friendly and knowledgeable election education assistant. You help citizens understand the democratic process in a clear, non-partisan, and accessible way.
-
-The user has selected: ${country} as their country. Tailor your answers to that country's election system when relevant.
-
-Guidelines:
-- Be educational, clear, and neutral — never partisan or political
-- Use simple language but don't oversimplify
-- Structure longer answers with headers and bullet points
-- When explaining processes, number the steps
-- Mention key timelines and deadlines where relevant
-- If unsure about a specific country's current laws, note it and suggest official government resources
-- Be encouraging about civic participation
-- Keep answers focused and concise — use 2-4 paragraphs max unless a detailed breakdown is needed`;
-
-            try {
-                const response = await fetch('https://api.anthropic.com/v1/messages', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        model: 'claude-sonnet-4-20250514',
-                        max_tokens: 1000,
-                        system: systemPrompt,
-                        messages: conversationHistory
-                    })
-                });
-
-                const data = await response.json();
-                hideTyping();
-
-                const reply = data.content?.[0]?.text || 'Sorry, I had trouble responding. Please try again.';
-                conversationHistory.push({ role: 'assistant', content: reply });
-                addMessage('ai', formatResponse(reply));
-
-            } catch (err) {
-                hideTyping();
-                addMessage('ai', '<p>Sorry, I encountered an error. Please check your connection and try again.</p>');
-            }
-
-            isLoading = false;
-            document.getElementById('sendBtn').disabled = false;
-        }
-
-        function sendQuickTopic(text) {
-            document.getElementById('userInput').value = text;
-            sendMessage(text);
-        }
+        function hideTyping() { const el = document.getElementById('typingRow'); if (el) el.remove(); }
 
         function showTimeline() {
-            const country = getSelectedCountry();
-            const ca = document.getElementById('chatArea');
+            const c = COUNTRY_NAMES[getCountry()] || 'General';
+            addMsg('user', 'Show me the election process timeline');
+            setTimeout(() => {
+                const ca = document.getElementById('chatArea');
+                const steps = [
+                    { n: 1, t: 'Candidate Filing', d: 'Candidates announce and submit nomination papers to the election authority', tm: '12–18 months before', s: 'done' },
+                    { n: 2, t: 'Primary / Party Nomination', d: 'Parties select their candidates through primaries, caucuses, or internal votes', tm: '6–12 months before', s: 'done' },
+                    { n: 3, t: 'Campaign Period', d: 'Candidates campaign across constituencies, debates are held, ads run', tm: '3–6 months before', s: 'active' },
+                    { n: 4, t: 'Voter Registration Deadline', d: 'Last day to register to vote in most jurisdictions', tm: '15–30 days before', s: 'up' },
+                    { n: 5, t: 'Early / Advance Voting', d: 'Many regions allow voting before the official election day', tm: '1–3 weeks before', s: 'up' },
+                    { n: 6, t: 'Election Day', d: 'Official voting day — polls open across the country and citizens cast their ballots', tm: 'The main event!', s: 'up' },
+                    { n: 7, t: 'Vote Counting & Projections', d: 'Ballots are tallied; media makes projections; preliminary results announced', tm: 'Election night', s: 'up' },
+                    { n: 8, t: 'Official Certification', d: 'Election authority formally certifies results; legal challenges resolved', tm: 'Days to weeks after', s: 'up' },
+                    { n: 9, t: 'Inauguration & Transfer of Power', d: 'Elected officials are sworn in and assume office', tm: 'Weeks to months later', s: 'up' },
+                ];
+                const stepsHTML = steps.map((s, i) => `
+      <div class="tl-step">
+        <div class="tl-col">
+          <div class="step-dot ${s.s === 'done' ? 'sd-done' : s.s === 'active' ? 'sd-active' : 'sd-up'}">${s.n}</div>
+          ${i < steps.length - 1 ? '<div class="tl-line"></div>' : ''}
+        </div>
+        <div class="tl-content">
+          <div class="tl-title">${s.t}</div>
+          <div class="tl-desc">${s.d}</div>
+          <div class="tl-time">${s.tm}</div>
+        </div>
+      </div>`).join('');
+                const card = document.createElement('div');
+                card.style.animation = 'fadeUp 0.25s ease';
+                card.innerHTML = `<div class="timeline-card"><h3>📅 Election Process — ${c}</h3><div class="tl-steps">${stepsHTML}</div><p style="margin-top:1rem;font-size:12px;color:var(--text-muted);">Timelines vary by country and election type. Ask me about any specific step!</p></div>`;
+                const row = document.createElement('div');
+                row.className = 'msg-row';
+                row.innerHTML = `<div class="avatar ai">C</div><div style="max-width:90%;width:100%;">${card.outerHTML}<div class="suggest-row"><button class="suggest-chip" onclick="ask('Tell me about voter registration deadlines')">↗ Registration deadlines</button><button class="suggest-chip" onclick="ask('What happens on election day?')">↗ Election day details</button><button class="suggest-chip" onclick="ask('How are votes counted and results declared?')">↗ Counting & results</button></div></div>`;
+                ca.appendChild(row);
+                scrollBottom();
+            }, 400);
+        }
 
-            const steps = [
-                { num: 1, label: 'Candidate Filing', desc: 'Candidates announce and file paperwork to run for office', timing: '12–18 months before', status: 'done' },
-                { num: 2, label: 'Primary / Nomination', desc: 'Parties hold primaries or caucuses to select their candidates', timing: '6–12 months before', status: 'done' },
-                { num: 3, label: 'Campaign Period', desc: 'Candidates campaign, debates are held, and ads run', timing: '3–6 months before', status: 'active' },
-                { num: 4, label: 'Voter Registration Deadline', desc: 'Last day to register to vote in most jurisdictions', timing: '15–30 days before', status: 'upcoming' },
-                { num: 5, label: 'Early Voting', desc: 'Many regions allow voting before the official election day', timing: '1–2 weeks before', status: 'upcoming' },
-                { num: 6, label: 'Election Day', desc: 'Official voting day — polls open and close on this date', timing: 'The big day!', status: 'upcoming' },
-                { num: 7, label: 'Vote Counting & Results', desc: 'Ballots are counted, results are projected and reported', timing: 'Election night', status: 'upcoming' },
-                { num: 8, label: 'Certification', desc: 'Official certification of results by election authorities', timing: 'Days to weeks after', status: 'upcoming' },
-                { num: 9, label: 'Inauguration', desc: 'Elected officials are sworn in and take office', timing: 'Weeks to months later', status: 'upcoming' },
-            ];
+        function sendMessage() {
+            const inp = document.getElementById('userInput');
+            const text = inp.value.trim();
+            if (!text) return;
+            inp.value = ''; inp.style.height = 'auto';
+            ask(text);
+        }
 
-            const stepsHTML = steps.map((s, i) => `
-    <div class="timeline-step">
-      <div class="step-line-col">
-        <div class="step-dot ${s.status}">${s.num}</div>
-        ${i < steps.length - 1 ? '<div class="step-connector"></div>' : ''}
-      </div>
-      <div class="step-content">
-        <div class="step-title">${s.label}</div>
-        <div class="step-desc">${s.desc}</div>
-        <div class="step-timing">${s.timing}</div>
-      </div>
-    </div>
-  `).join('');
-
-            const card = document.createElement('div');
-            card.className = 'timeline-card';
-            card.style.animation = 'fadeUp 0.3s ease';
-            card.innerHTML = `
-    <h3>🗓️ Election Process Timeline — ${country}</h3>
-    <div class="timeline-steps">${stepsHTML}</div>
-    <p style="margin-top: 1rem; font-size: 12.5px; color: var(--text-muted);">Timelines vary by country and election type. Ask me about any specific step!</p>
-  `;
-            ca.appendChild(card);
-            scrollToBottom();
-            conversationHistory.push({ role: 'user', content: `Show me a visual election timeline for ${country}` });
-            conversationHistory.push({ role: 'assistant', content: `Here is the election process timeline for ${country}. It covers all major phases from candidate filing through inauguration. Would you like me to explain any specific step in more detail?` });
+        function ask(text) {
+            addMsg('user', text);
+            showTyping();
+            setTimeout(() => {
+                hideTyping();
+                const result = getResponse(text);
+                if (result.special === 'timeline') { showTimeline(); return; }
+                addMsg('ai', result.html, result.suggest);
+            }, 500 + Math.random() * 300);
         }
     </script>
 </body>
