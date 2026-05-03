@@ -51,6 +51,57 @@
             flex-direction: column;
         }
 
+        /* ACCESSIBILITY & HIGH CONTRAST */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--navy);
+            color: var(--gold);
+            padding: 8px;
+            z-index: 1000;
+            transition: top 0.2s;
+            font-weight: bold;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+
+        *:focus-visible {
+            outline: 3px solid var(--gold) !important;
+            outline-offset: 2px !important;
+        }
+
+        body.high-contrast {
+            --navy: #000000;
+            --navy-mid: #000000;
+            --navy-light: #222222;
+            --gold: #FFFF00;
+            --gold-light: #FFFF00;
+            --gold-pale: #000000;
+            --cream: #000000;
+            --white: #000000;
+            --text-dark: #FFFFFF;
+            --text-mid: #DDDDDD;
+            --text-muted: #AAAAAA;
+            --border: #FFFFFF;
+            --shadow-sm: none;
+        }
+
+        body.high-contrast .welcome-card,
+        body.high-contrast .info-card,
+        body.high-contrast .timeline-card,
+        body.high-contrast .bubble.ai,
+        body.high-contrast .typing-bubble {
+            border: 2px solid #FFFFFF;
+        }
+
+        body.high-contrast .header-badge {
+            border-color: #FFFF00;
+            color: #FFFF00;
+        }
+
         /* HEADER */
         header {
             background: var(--navy);
@@ -132,6 +183,25 @@
             border: 1px solid rgba(201, 168, 76, 0.3);
             padding: 4px 10px;
             border-radius: 100px;
+        }
+
+        .hc-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 10px;
+        }
+
+        .hc-btn:hover {
+            background: rgba(201, 168, 76, 0.1);
         }
 
         /* LAYOUT */
@@ -774,10 +844,10 @@
 </head>
 
 <body>
-
-    <header>
-        <div class="logo">
-            <div class="logo-icon">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header role="banner">
+        <div class="logo" aria-label="CivicGuide Logo">
+            <div class="logo-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
                     <path d="M2 20h20v2H2zM4 10h2v9H4zm7 0h2v9h-2zm7 0h2v9h-2zM2 6l10-5 10 5v3H2z" />
                 </svg>
@@ -785,18 +855,22 @@
             <div class="logo-text">Civic<span>Guide</span></div>
         </div>
         <div class="header-right">
-            <div id="google_translate_element"></div>
-            <div class="status-dot"></div>
-            <div class="header-badge">Election Assistant</div>
+            <button class="hc-btn" onclick="toggleHighContrast()" aria-label="Toggle High Contrast Mode">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8v16z"/></svg>
+                Contrast
+            </button>
+            <div id="google_translate_element" aria-label="Translate Page"></div>
+            <div class="status-dot" aria-hidden="true"></div>
+            <div class="header-badge" role="status">Election Assistant</div>
         </div>
     </header>
 
     <div class="app-body">
-        <aside class="sidebar">
+        <aside class="sidebar" role="navigation" aria-label="Topics Sidebar">
             <div class="sidebar-section">
-                <div class="sidebar-label">Your Country</div>
+                <div class="sidebar-label" id="countryLabel">Your Country</div>
                 <div class="country-wrap" style="padding:0;">
-                    <select id="countrySelect">
+                    <select id="countrySelect" aria-labelledby="countryLabel">
                         <option value="US">🇺🇸 United States</option>
                         <option value="IN">🇮🇳 India</option>
                         <option value="UK">🇬🇧 United Kingdom</option>
@@ -814,38 +888,38 @@
             <div class="sidebar-section">
                 <div class="sidebar-label">Quick Topics</div>
                 <button class="topic-btn" onclick="ask('How do I register to vote?')"><span
-                        class="t-icon t-blue">📋</span>Voter Registration</button>
-                <button class="topic-btn" onclick="showTimeline()"><span class="t-icon t-amber">📅</span>Election
+                        class="t-icon t-blue" aria-hidden="true">📋</span>Voter Registration</button>
+                <button class="topic-btn" onclick="showTimeline()"><span class="t-icon t-amber" aria-hidden="true">📅</span>Election
                     Timeline</button>
                 <button class="topic-btn" onclick="ask('How does voting work on election day?')"><span
-                        class="t-icon t-green">🗳️</span>How Voting Works</button>
+                        class="t-icon t-green" aria-hidden="true">🗳️</span>How Voting Works</button>
                 <button class="topic-btn" onclick="ask('What are the different types of elections?')"><span
-                        class="t-icon t-purple">🏛️</span>Types of Elections</button>
+                        class="t-icon t-purple" aria-hidden="true">🏛️</span>Types of Elections</button>
                 <button class="topic-btn" onclick="ask('How are votes counted and results declared?')"><span
-                        class="t-icon t-teal">📊</span>Vote Counting</button>
+                        class="t-icon t-teal" aria-hidden="true">📊</span>Vote Counting</button>
                 <button class="topic-btn" onclick="ask('What is the electoral system?')"><span
-                        class="t-icon t-red">🗺️</span>Electoral Systems</button>
+                        class="t-icon t-red" aria-hidden="true">🗺️</span>Electoral Systems</button>
             </div>
             <div class="sidebar-divider"></div>
             <div class="sidebar-section">
                 <div class="sidebar-label">More Topics</div>
                 <button class="topic-btn" onclick="ask('Where do I vote?')"><span
-                        class="t-icon t-amber">📍</span>Where to Vote</button>
+                        class="t-icon t-amber" aria-hidden="true">📍</span>Where to Vote</button>
                 <button class="topic-btn" onclick="ask('What are my rights as a voter?')"><span
-                        class="t-icon t-green">⚖️</span>Voter Rights</button>
+                        class="t-icon t-green" aria-hidden="true">⚖️</span>Voter Rights</button>
                 <button class="topic-btn" onclick="ask('Who can run for office and how?')"><span
-                        class="t-icon t-blue">🎯</span>Running for Office</button>
+                        class="t-icon t-blue" aria-hidden="true">🎯</span>Running for Office</button>
                 <button class="topic-btn" onclick="ask('How to spot election misinformation?')"><span
-                        class="t-icon t-red">🛡️</span>Avoid Misinformation</button>
+                        class="t-icon t-red" aria-hidden="true">🛡️</span>Avoid Misinformation</button>
                 <button class="topic-btn" onclick="ask('What is gerrymandering?')"><span
-                        class="t-icon t-purple">🗾</span>Gerrymandering</button>
+                        class="t-icon t-purple" aria-hidden="true">🗾</span>Gerrymandering</button>
                 <button class="topic-btn" onclick="ask('How does mail-in or absentee voting work?')"><span
-                        class="t-icon t-teal">✉️</span>Mail-in Voting</button>
+                        class="t-icon t-teal" aria-hidden="true">✉️</span>Mail-in Voting</button>
             </div>
         </aside>
 
-        <main class="main">
-            <div class="chat-area" id="chatArea">
+        <main class="main" id="main-content" role="main">
+            <div class="chat-area" id="chatArea" aria-live="polite" aria-atomic="false">
                 <div class="welcome-card">
                     <div class="welcome-eyebrow">Your civic companion</div>
                     <div class="welcome-title">Understand Elections,<br />Empower Your Vote</div>
@@ -865,37 +939,37 @@
                 </div>
 
                 <div class="info-grid">
-                    <div class="info-card"
-                        onclick="ask('How does voter registration work and what documents do I need?')">
-                        <div class="ic-icon">📋</div>
+                    <button class="info-card"
+                        onclick="ask('How does voter registration work and what documents do I need?')" style="text-align: left; background: var(--white); border-color: var(--border);">
+                        <div class="ic-icon" aria-hidden="true">📋</div>
                         <div class="ic-title">Register to Vote</div>
                         <div class="ic-desc">Eligibility, documents, deadlines & online options</div>
-                    </div>
-                    <div class="info-card"
-                        onclick="ask('Explain the full election process from candidates filing to results')">
-                        <div class="ic-icon">🏛️</div>
+                    </button>
+                    <button class="info-card"
+                        onclick="ask('Explain the full election process from candidates filing to results')" style="text-align: left; background: var(--white); border-color: var(--border);">
+                        <div class="ic-icon" aria-hidden="true">🏛️</div>
                         <div class="ic-title">The Full Process</div>
                         <div class="ic-desc">From candidacy filing to final results</div>
-                    </div>
-                    <div class="info-card" onclick="ask('What are the different ways I can cast my vote?')">
-                        <div class="ic-icon">🗳️</div>
+                    </button>
+                    <button class="info-card" onclick="ask('What are the different ways I can cast my vote?')" style="text-align: left; background: var(--white); border-color: var(--border);">
+                        <div class="ic-icon" aria-hidden="true">🗳️</div>
                         <div class="ic-title">Ways to Vote</div>
                         <div class="ic-desc">In-person, mail-in, absentee & early voting</div>
-                    </div>
-                    <div class="info-card" onclick="ask('How are election results verified and certified?')">
-                        <div class="ic-icon">✅</div>
+                    </button>
+                    <button class="info-card" onclick="ask('How are election results verified and certified?')" style="text-align: left; background: var(--white); border-color: var(--border);">
+                        <div class="ic-icon" aria-hidden="true">✅</div>
                         <div class="ic-title">Results & Certification</div>
                         <div class="ic-desc">Counting, auditing, certification & inauguration</div>
-                    </div>
+                    </button>
                 </div>
             </div>
 
-            <div class="input-bar">
+            <div class="input-bar" role="search" aria-label="Ask a question">
                 <div class="input-wrap">
-                    <textarea id="userInput" placeholder="Ask anything about elections…" rows="1"
+                    <textarea id="userInput" aria-label="Type your question about elections here" placeholder="Ask anything about elections…" rows="1"
                         onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-                    <button class="send-btn" onclick="sendMessage()">
-                        <svg viewBox="0 0 24 24">
+                    <button class="send-btn" onclick="sendMessage()" aria-label="Send message">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
                         </svg>
                     </button>
@@ -1031,6 +1105,7 @@
                 keys: ['where to vote', 'where do i vote', 'polling station', 'polling location', 'voting location', 'polling place'],
                 ans: `<h4>Find Your Polling Station</h4><p>Polling locations are assigned based on your registered address. You must usually vote at your specific assigned location on election day.</p><p>Use the map below to explore polling stations near your current location, or check your official voter registration card for your exact assigned location.</p>
                 <iframe 
+                  title="Google Maps showing polling stations near your location"
                   width="100%" 
                   height="260" 
                   style="border:1px solid var(--border); border-radius: 12px; margin-top: 10px;" 
@@ -1087,12 +1162,15 @@
             row.className = 'msg-row' + (isUser ? ' user' : '');
             let suggestHTML = '';
             if (suggests && suggests.length) {
-                suggestHTML = `<div class="suggest-row">${suggests.map(s => `<button class="suggest-chip" onclick="ask('${s.replace(/'/g, "\\'")}')">↗ ${s}</button>`).join('')}</div>`;
+                suggestHTML = `<div class="suggest-row" aria-label="Suggested follow-up questions">${suggests.map(s => `<button class="suggest-chip" onclick="ask('${s.replace(/'/g, "\\'")}')">↗ ${s}</button>`).join('')}</div>`;
             }
             row.innerHTML = `
-    <div class="avatar ${isUser ? 'user' : 'ai'}">${isUser ? 'You' : 'C'}</div>
+    <div class="avatar ${isUser ? 'user' : 'ai'}" aria-hidden="true">${isUser ? 'You' : 'C'}</div>
     <div>
-      <div class="bubble ${isUser ? 'user' : 'ai'}">${html}</div>
+      <div class="bubble ${isUser ? 'user' : 'ai'}">
+        <span class="sr-only" style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;">${isUser ? 'You asked: ' : 'CivicGuide responded: '}</span>
+        ${html}
+      </div>
       ${suggestHTML}
     </div>`;
             ca.appendChild(row);
@@ -1103,7 +1181,9 @@
             const ca = document.getElementById('chatArea');
             const row = document.createElement('div');
             row.className = 'typing-row'; row.id = 'typingRow';
-            row.innerHTML = `<div class="avatar ai">C</div><div class="typing-bubble"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+            row.setAttribute('role', 'status');
+            row.setAttribute('aria-label', 'CivicGuide is typing');
+            row.innerHTML = `<div class="avatar ai" aria-hidden="true">C</div><div class="typing-bubble"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
             ca.appendChild(row); scrollBottom();
         }
         function hideTyping() { const el = document.getElementById('typingRow'); if (el) el.remove(); }
@@ -1175,6 +1255,21 @@
                 addMsg('ai', result.html, result.suggest);
             }, 500 + Math.random() * 300);
         }
+
+        // High Contrast Mode Logic
+        function toggleHighContrast() {
+            const body = document.body;
+            body.classList.toggle('high-contrast');
+            const isHC = body.classList.contains('high-contrast');
+            localStorage.setItem('highContrast', isHC);
+        }
+
+        // Check user preference on load
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('highContrast') === 'true') {
+                document.body.classList.add('high-contrast');
+            }
+        });
     </script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
