@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicGuide — Election Assistant</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --navy: #0B1F3A;
+            --navy-mid: #142849;
+            --navy-light: #1E3A6E;
+            --gold: #C9A84C;
+            --gold-light: #E8C96A;
+            --gold-pale: #F5E9C8;
+            --cream: #FAF7F0;
+            --white: #FFFFFF;
+            --text-dark: #0B1F3A;
+            --text-mid: #3A4F6A;
+            --text-muted: #7A8FA8;
+            --border: rgba(11, 31, 58, 0.12);
+            --shadow-sm: 0 2px 8px rgba(11, 31, 58, 0.08);
+            --shadow-md: 0 8px 32px rgba(11, 31, 58, 0.14);
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--navy);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background: var(--gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--navy);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        .logo-text span {
+            color: var(--gold);
+        }
+
+        .header-badge {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gold-light);
+            background: rgba(201, 168, 76, 0.15);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            padding: 4px 12px;
+            border-radius: 100px;
+            letter-spacing: 0.03em;
+        }
+
+        /* ── LAYOUT ── */
+        .app-body {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 64px);
+            overflow: hidden;
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            background: var(--white);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding-bottom: 1.5rem;
+        }
+
+        .sidebar-section {
+            padding: 1.25rem 1.25rem 0.5rem;
+        }
+
+        .sidebar-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .topic-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 10px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-dark);
+            text-align: left;
+            transition: all 0.15s;
+            margin-bottom: 2px;
+        }
+
+        .topic-btn:hover {
+            background: var(--cream);
+            color: var(--navy);
+        }
+
+        .topic-btn.active {
+            background: rgba(11, 31, 58, 0.07);
+            font-weight: 500;
+            color: var(--navy);
+        }
+
+        .topic-btn .icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .topic-btn .icon.blue {
+            background: #E8F0FE;
+        }
+
+        .topic-btn .icon.green {
+            background: #E6F4EA;
+        }
+
+        .topic-btn .icon.amber {
+            background: #FEF7E0;
+        }
+
+        .topic-btn .icon.red {
+            background: #FCE8E6;
+        }
+
+        .topic-btn .icon.purple {
+            background: #F3E8FD;
+        }
+
+        .topic-btn .icon.teal {
+            background: #E0F2F1;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 0.75rem 1.25rem;
+        }
+
+        /* ── COUNTRY SELECT ── */
+        .country-select-wrap {
+            padding: 0 1.25rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            color: var(--text-dark);
+            background: var(--cream);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A8FA8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--navy-light);
+        }
+
+        /* ── MAIN CHAT ── */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: var(--cream);
+        }
+
+        .chat-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* ── WELCOME ── */
+        .welcome-card {
+            background: var(--navy);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-card::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 200px;
+            height: 200px;
+            background: rgba(201, 168, 76, 0.12);
+            border-radius: 50%;
+        }
+
+        .welcome-card::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            right: 80px;
+            width: 120px;
+            height: 120px;
+            background: rgba(201, 168, 76, 0.07);
+            border-radius: 50%;
+        }
+
+        .welcome-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+
+        .welcome-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            max-width: 500px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quick-prompts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 1.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quick-prompt-chip {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .quick-prompt-chip:hover {
+            background: rgba(201, 168, 76, 0.25);
+            border-color: rgba(201, 168, 76, 0.5);
+            color: var(--gold-light);
+        }
+
+        /* ── MESSAGES ── */
+        .msg-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            animation: fadeUp 0.3s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .msg-row.user {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .avatar.ai {
+            background: var(--navy);
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+        }
+
+        .avatar.user {
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 13px;
+        }
+
+        .bubble {
+            max-width: 72%;
+            padding: 13px 16px;
+            border-radius: 16px;
+            font-size: 14.5px;
+            line-height: 1.75;
+        }
+
+        .bubble.ai {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-top-left-radius: 4px;
+            color: var(--text-dark);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .bubble.user {
+            background: var(--navy);
+            color: var(--white);
+            border-top-right-radius: 4px;
+        }
+
+        /* ── TIMELINE CARD ── */
+        .timeline-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timeline-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .timeline-step {
+            display: flex;
+            gap: 16px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .timeline-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .step-line-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 24px;
+            flex-shrink: 0;
+        }
+
+        .step-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .step-dot.done {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .step-dot.active {
+            background: var(--gold);
+            color: var(--navy);
+            box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.25);
+        }
+
+        .step-dot.upcoming {
+            background: var(--cream);
+            border: 2px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .step-connector {
+            flex: 1;
+            width: 2px;
+            background: var(--border);
+            margin: 2px 0;
+        }
+
+        .step-content {
+            padding-top: 2px;
+        }
+
+        .step-title {
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .step-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            line-height: 1.5;
+        }
+
+        .step-timing {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gold);
+            background: var(--gold-pale);
+            border-radius: 100px;
+            padding: 2px 9px;
+            display: inline-block;
+            margin-top: 5px;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── INFO CARDS GRID ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .info-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .info-card:hover {
+            border-color: var(--navy-light);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
+        }
+
+        .info-card-icon {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .info-card-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+
+        .info-card-desc {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ── TYPING ── */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            border-top-left-radius: 4px;
+            width: fit-content;
+        }
+
+        .typing-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            animation: blink 1.2s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes blink {
+
+            0%,
+            60%,
+            100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+
+            30% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ── INPUT BAR ── */
+        .input-bar {
+            padding: 1rem 2.5rem 1.5rem;
+            border-top: 1px solid var(--border);
+            background: var(--cream);
+        }
+
+        .input-wrap {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 10px 12px 10px 16px;
+            transition: border-color 0.15s;
+        }
+
+        .input-wrap:focus-within {
+            border-color: var(--navy-light);
+            box-shadow: 0 0 0 3px rgba(30, 58, 110, 0.1);
+        }
+
+        textarea {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            color: var(--text-dark);
+            resize: none;
+            outline: none;
+            line-height: 1.5;
+            max-height: 120px;
+            min-height: 24px;
+        }
+
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .send-btn {
+            width: 38px;
+            height: 38px;
+            background: var(--navy);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.15s;
+        }
+
+        .send-btn:hover {
+            background: var(--navy-light);
+        }
+
+        .send-btn:disabled {
+            background: var(--border);
+            cursor: not-allowed;
+        }
+
+        .send-btn svg {
+            fill: var(--white);
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ── RICH CONTENT ── */
+        .bubble.ai strong {
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        .bubble.ai ul,
+        .bubble.ai ol {
+            padding-left: 1.25rem;
+            margin: 0.5rem 0;
+        }
+
+        .bubble.ai li {
+            margin-bottom: 4px;
+        }
+
+        .bubble.ai p {
+            margin-bottom: 0.5rem;
+        }
+
+        .bubble.ai p:last-child {
+            margin-bottom: 0;
+        }
+
+        .bubble.ai h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--navy);
+            margin: 0.75rem 0 0.4rem;
+        }
+
+        .bubble.ai code {
+            background: var(--cream);
+            border-radius: 4px;
+            padding: 1px 5px;
+            font-size: 13px;
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 99px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 20h20v2H2zM4 10h2v9H4zm7 0h2v9h-2zm7 0h2v9h-2zM2 6l10-5 10 5v3H2z" />
+                </svg>
+            </div>
+            <div class="logo-text">Civic<span>Guide</span></div>
+        </div>
+        <div class="header-badge">AI Election Assistant</div>
+    </header>
+
+    <div class="app-body">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-label">Your Country</div>
+                <div class="country-select-wrap" style="padding: 0;">
+                    <select id="countrySelect">
+                        <option value="US">🇺🇸 United States</option>
+                        <option value="IN">🇮🇳 India</option>
+                        <option value="UK">🇬🇧 United Kingdom</option>
+                        <option value="CA">🇨🇦 Canada</option>
+                        <option value="AU">🇦🇺 Australia</option>
+                        <option value="DE">🇩🇪 Germany</option>
+                        <option value="FR">🇫🇷 France</option>
+                        <option value="BR">🇧🇷 Brazil</option>
+                        <option value="ZA">🇿🇦 South Africa</option>
+                        <option value="GEN">🌍 General / Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-label">Quick Topics</div>
+
+                <button class="topic-btn" onclick="sendQuickTopic('How do I register to vote?')">
+                    <span class="icon blue">📋</span> Voter Registration
+                </button>
+                <button class="topic-btn" onclick="sendQuickTopic('Explain the election timeline and key dates')">
+                    <span class="icon amber">📅</span> Election Timeline
+                </button>
+                <button class="topic-btn" onclick="sendQuickTopic('How does voting work on election day?')">
+                    <span class="icon green">🗳️</span> How Voting Works
+                </button>
+                <button class="topic-btn" onclick="sendQuickTopic('What are the different types of elections?')">
+                    <span class="icon purple">🏛️</span> Types of Elections
+                </button>
+                <button class="topic-btn" onclick="sendQuickTopic('How are votes counted and results declared?')">
+                    <span class="icon teal">📊</span> Vote Counting
+                </button>
+                <button class="topic-btn" onclick="sendQuickTopic('What is the Electoral College?')">
+                    <span class="icon red">🗺️</span> Electoral Systems
+                </button>
+            </div>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-label">Visual Guides</div>
+                <button class="topic-btn" onclick="showTimeline()">
+                    <span class="icon amber">⬛</span> Election Timeline
+                </button>
+                <button class="topic-btn" onclick="sendQuickTopic('What are my rights as a voter?')">
+                    <span class="icon green">⚖️</span> Voter Rights
+                </button>
+                <button class="topic-btn" onclick="sendQuickTopic('How to spot and avoid election misinformation?')">
+                    <span class="icon red">🛡️</span> Avoid Misinformation
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN AREA -->
+        <main class="main">
+            <div class="chat-area" id="chatArea">
+
+                <!-- WELCOME -->
+                <div class="welcome-card">
+                    <div class="welcome-eyebrow">Your civic companion</div>
+                    <div class="welcome-title">Understand Elections,<br />Empower Your Vote</div>
+                    <div class="welcome-desc">Ask me anything about elections — registration, timelines, how voting
+                        works, electoral systems, and more. I'm here to make democracy easy to understand.</div>
+                    <div class="quick-prompts">
+                        <button class="quick-prompt-chip" onclick="sendQuickTopic('How do I register to vote?')">How do
+                            I register to vote?</button>
+                        <button class="quick-prompt-chip"
+                            onclick="sendQuickTopic('Walk me through election day step by step')">Walk me through
+                            election day</button>
+                        <button class="quick-prompt-chip"
+                            onclick="sendQuickTopic('What happens after voting ends?')">What happens after
+                            voting?</button>
+                        <button class="quick-prompt-chip" onclick="showTimeline()">Show election timeline</button>
+                    </div>
+                </div>
+
+                <!-- INFO GRID -->
+                <div class="info-grid">
+                    <div class="info-card"
+                        onclick="sendQuickTopic('How does voter registration work and what documents do I need?')">
+                        <div class="info-card-icon">📋</div>
+                        <div class="info-card-title">Register to Vote</div>
+                        <div class="info-card-desc">Eligibility, documents needed, deadlines & online options</div>
+                    </div>
+                    <div class="info-card"
+                        onclick="sendQuickTopic('Explain the full election process from candidates to results')">
+                        <div class="info-card-icon">🏛️</div>
+                        <div class="info-card-title">The Full Process</div>
+                        <div class="info-card-desc">From candidacy filing to final results announced</div>
+                    </div>
+                    <div class="info-card" onclick="sendQuickTopic('What are the different ways I can cast my vote?')">
+                        <div class="info-card-icon">🗳️</div>
+                        <div class="info-card-title">Ways to Vote</div>
+                        <div class="info-card-desc">In-person, mail-in, absentee & early voting explained</div>
+                    </div>
+                    <div class="info-card" onclick="sendQuickTopic('How are election results verified and certified?')">
+                        <div class="info-card-icon">✅</div>
+                        <div class="info-card-title">Results & Certification</div>
+                        <div class="info-card-desc">Counting, auditing, certification & inauguration</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- INPUT BAR -->
+            <div class="input-bar">
+                <div class="input-wrap">
+                    <textarea id="userInput" placeholder="Ask anything about elections…" rows="1"
+                        onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="input-hint">Powered by Claude AI · Select your country in the sidebar for tailored answers
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const COUNTRY_NAMES = {
+            US: 'United States', IN: 'India', UK: 'United Kingdom',
+            CA: 'Canada', AU: 'Australia', DE: 'Germany',
+            FR: 'France', BR: 'Brazil', ZA: 'South Africa', GEN: 'General'
+        };
+
+        let conversationHistory = [];
+        let isLoading = false;
+
+        function getSelectedCountry() {
+            const sel = document.getElementById('countrySelect');
+            return COUNTRY_NAMES[sel.value] || 'General';
+        }
+
+        function autoResize(el) {
+            el.style.height = 'auto';
+            el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+        }
+
+        function handleKey(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function scrollToBottom() {
+            const ca = document.getElementById('chatArea');
+            ca.scrollTop = ca.scrollHeight;
+        }
+
+        function addMessage(role, html) {
+            const ca = document.getElementById('chatArea');
+            const isUser = role === 'user';
+            const row = document.createElement('div');
+            row.className = 'msg-row' + (isUser ? ' user' : '');
+            row.innerHTML = `
+    <div class="avatar ${isUser ? 'user' : 'ai'}">${isUser ? 'You' : 'C'}</div>
+    <div class="bubble ${isUser ? 'user' : 'ai'}">${html}</div>
+  `;
+            ca.appendChild(row);
+            scrollToBottom();
+            return row;
+        }
+
+        function showTyping() {
+            const ca = document.getElementById('chatArea');
+            const row = document.createElement('div');
+            row.className = 'msg-row';
+            row.id = 'typingRow';
+            row.innerHTML = `
+    <div class="avatar ai">C</div>
+    <div class="typing-indicator">
+      <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+    </div>
+  `;
+            ca.appendChild(row);
+            scrollToBottom();
+        }
+
+        function hideTyping() {
+            const el = document.getElementById('typingRow');
+            if (el) el.remove();
+        }
+
+        function formatResponse(text) {
+            return text
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.+?)\*/g, '<em>$1</em>')
+                .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
+                .replace(/^### (.+)$/gm, '<h4>$1</h4>')
+                .replace(/^## (.+)$/gm, '<h4>$1</h4>')
+                .replace(/^- (.+)$/gm, '<li>$1</li>')
+                .replace(/(<li>[\s\S]+?<\/li>)/g, '<ul>$1</ul>')
+                .replace(/<\/ul>\s*<ul>/g, '')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br/>')
+                .replace(/^(.+)$/, '<p>$1</p>');
+        }
+
+        async function sendMessage(overrideText) {
+            if (isLoading) return;
+            const input = document.getElementById('userInput');
+            const text = overrideText || input.value.trim();
+            if (!text) return;
+
+            input.value = '';
+            input.style.height = 'auto';
+            isLoading = true;
+            document.getElementById('sendBtn').disabled = true;
+
+            addMessage('user', text);
+            conversationHistory.push({ role: 'user', content: text });
+
+            showTyping();
+
+            const country = getSelectedCountry();
+            const systemPrompt = `You are CivicGuide, a friendly and knowledgeable election education assistant. You help citizens understand the democratic process in a clear, non-partisan, and accessible way.
+
+The user has selected: ${country} as their country. Tailor your answers to that country's election system when relevant.
+
+Guidelines:
+- Be educational, clear, and neutral — never partisan or political
+- Use simple language but don't oversimplify
+- Structure longer answers with headers and bullet points
+- When explaining processes, number the steps
+- Mention key timelines and deadlines where relevant
+- If unsure about a specific country's current laws, note it and suggest official government resources
+- Be encouraging about civic participation
+- Keep answers focused and concise — use 2-4 paragraphs max unless a detailed breakdown is needed`;
+
+            try {
+                const response = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 1000,
+                        system: systemPrompt,
+                        messages: conversationHistory
+                    })
+                });
+
+                const data = await response.json();
+                hideTyping();
+
+                const reply = data.content?.[0]?.text || 'Sorry, I had trouble responding. Please try again.';
+                conversationHistory.push({ role: 'assistant', content: reply });
+                addMessage('ai', formatResponse(reply));
+
+            } catch (err) {
+                hideTyping();
+                addMessage('ai', '<p>Sorry, I encountered an error. Please check your connection and try again.</p>');
+            }
+
+            isLoading = false;
+            document.getElementById('sendBtn').disabled = false;
+        }
+
+        function sendQuickTopic(text) {
+            document.getElementById('userInput').value = text;
+            sendMessage(text);
+        }
+
+        function showTimeline() {
+            const country = getSelectedCountry();
+            const ca = document.getElementById('chatArea');
+
+            const steps = [
+                { num: 1, label: 'Candidate Filing', desc: 'Candidates announce and file paperwork to run for office', timing: '12–18 months before', status: 'done' },
+                { num: 2, label: 'Primary / Nomination', desc: 'Parties hold primaries or caucuses to select their candidates', timing: '6–12 months before', status: 'done' },
+                { num: 3, label: 'Campaign Period', desc: 'Candidates campaign, debates are held, and ads run', timing: '3–6 months before', status: 'active' },
+                { num: 4, label: 'Voter Registration Deadline', desc: 'Last day to register to vote in most jurisdictions', timing: '15–30 days before', status: 'upcoming' },
+                { num: 5, label: 'Early Voting', desc: 'Many regions allow voting before the official election day', timing: '1–2 weeks before', status: 'upcoming' },
+                { num: 6, label: 'Election Day', desc: 'Official voting day — polls open and close on this date', timing: 'The big day!', status: 'upcoming' },
+                { num: 7, label: 'Vote Counting & Results', desc: 'Ballots are counted, results are projected and reported', timing: 'Election night', status: 'upcoming' },
+                { num: 8, label: 'Certification', desc: 'Official certification of results by election authorities', timing: 'Days to weeks after', status: 'upcoming' },
+                { num: 9, label: 'Inauguration', desc: 'Elected officials are sworn in and take office', timing: 'Weeks to months later', status: 'upcoming' },
+            ];
+
+            const stepsHTML = steps.map((s, i) => `
+    <div class="timeline-step">
+      <div class="step-line-col">
+        <div class="step-dot ${s.status}">${s.num}</div>
+        ${i < steps.length - 1 ? '<div class="step-connector"></div>' : ''}
+      </div>
+      <div class="step-content">
+        <div class="step-title">${s.label}</div>
+        <div class="step-desc">${s.desc}</div>
+        <div class="step-timing">${s.timing}</div>
+      </div>
+    </div>
+  `).join('');
+
+            const card = document.createElement('div');
+            card.className = 'timeline-card';
+            card.style.animation = 'fadeUp 0.3s ease';
+            card.innerHTML = `
+    <h3>🗓️ Election Process Timeline — ${country}</h3>
+    <div class="timeline-steps">${stepsHTML}</div>
+    <p style="margin-top: 1rem; font-size: 12.5px; color: var(--text-muted);">Timelines vary by country and election type. Ask me about any specific step!</p>
+  `;
+            ca.appendChild(card);
+            scrollToBottom();
+            conversationHistory.push({ role: 'user', content: `Show me a visual election timeline for ${country}` });
+            conversationHistory.push({ role: 'assistant', content: `Here is the election process timeline for ${country}. It covers all major phases from candidate filing through inauguration. Would you like me to explain any specific step in more detail?` });
+        }
+    </script>
+</body>
+
+</html>
