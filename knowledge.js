@@ -134,12 +134,27 @@ const KB = [
     }
 ];
 
+/**
+ * Retrieves specific election data for a given country.
+ * Falls back to general data ('GEN') if the country or specific key is missing.
+ * 
+ * @param {string} c - The 2-letter country code (e.g., 'US', 'IN').
+ * @param {string} key - The data key to retrieve (e.g., 'register', 'system', 'election_day').
+ * @returns {string} The localized HTML response string.
+ */
 function countryData(c, key) {
     const d = COUNTRY_DATA[c] || COUNTRY_DATA['GEN'];
     return d[key] || COUNTRY_DATA['GEN'][key];
 }
 
-// Ensure countryCode is provided to make this function unit-testable
+/**
+ * Core Knowledge Engine matching function.
+ * Evaluates user input against predefined keywords and returns the appropriate response payload.
+ * 
+ * @param {string} input - The raw text input from the user.
+ * @param {string} [countryCode='GEN'] - The current 2-letter country code context.
+ * @returns {Object} A response object containing either an `html` payload, a `special` trigger, and an array of `suggest`ed follow-ups.
+ */
 function getResponse(input, countryCode = 'GEN') {
     const q = input.toLowerCase();
     for (const item of KB) {
@@ -151,7 +166,7 @@ function getResponse(input, countryCode = 'GEN') {
     }
     // fallback
     return {
-        html: \`<p>That's a great question about elections! I have built-in knowledge on these topics — try asking about:</p><ul><li><strong>Voter registration</strong> — how to sign up, deadlines, documents</li><li><strong>Election day</strong> — what to bring, polling hours, your rights</li><li><strong>Vote counting</strong> — how results are tallied and certified</li><li><strong>Electoral systems</strong> — FPTP, proportional representation, ranked choice</li><li><strong>Misinformation</strong> — how to spot false election claims</li><li><strong>Gerrymandering</strong> — how district lines affect election outcomes</li></ul><p>Or click a topic in the sidebar to get started!</p>\`,
+        html: `<p>That's a great question about elections! I have built-in knowledge on these topics — try asking about:</p><ul><li><strong>Voter registration</strong> — how to sign up, deadlines, documents</li><li><strong>Election day</strong> — what to bring, polling hours, your rights</li><li><strong>Vote counting</strong> — how results are tallied and certified</li><li><strong>Electoral systems</strong> — FPTP, proportional representation, ranked choice</li><li><strong>Misinformation</strong> — how to spot false election claims</li><li><strong>Gerrymandering</strong> — how district lines affect election outcomes</li></ul><p>Or click a topic in the sidebar to get started!</p>`,
         suggest: ['How do I register to vote?', 'What happens on election day?', 'How are votes counted?']
     };
 }

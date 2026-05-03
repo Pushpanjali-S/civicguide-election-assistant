@@ -2,40 +2,82 @@
 
 > An interactive election education assistant — fully self-contained, zero API keys, zero backend. Works offline.
 
-**Live Demo:** `https://YOUR-SERVICE-abc123-uc.a.run.app`  
-**GitHub:** `https://github.com/YOUR_USERNAME/civicguide`
+**Live Demo:** [https://civicguide-app-281537708673.us-central1.run.app](https://civicguide-app-281537708673.us-central1.run.app)  
+**Test Suite:** [https://civicguide-app-281537708673.us-central1.run.app/test/](https://civicguide-app-281537708673.us-central1.run.app/test/)
 
 ---
 
-## Chosen Vertical
+## 📸 Screenshots
 
-**Civic Education / Government Services** — helping citizens understand elections, their rights, and the democratic process in a clear, non-partisan way.
+*(To be added: Add screenshots of the interface here)*
 
 ---
 
-## How It Works
+## ✨ Feature List
 
-CivicGuide is a **100% static single-file web app** — no API keys, no server, no backend. It runs entirely in the browser using a built-in knowledge engine.
+CivicGuide is packed with features to deliver a seamless and accessible civic education experience:
 
-### Architecture
+- **Interactive Conversational UI:** Ask questions in natural language and receive immediate responses.
+- **Offline & Serverless:** A 100% static client-side application. No backend needed, ultra-fast loading, fully offline-capable once loaded.
+- **Multi-Country Support:** Tailors responses for specific electoral systems (US, UK, India, Canada, Australia).
+- **Dynamic Timelines:** Generates step-by-step visual election timelines on demand.
+- **Smart Topic Suggestions:** Context-aware chips offer relevant follow-up questions.
+- **Multi-language Support:** Integrated Google Translate for global accessibility.
+- **Polling Locator:** Embeds Google Maps based on user intent.
+- **Robust Testing Suite:** Visual test runner to validate all knowledge paths.
+
+---
+
+## ♿ Accessibility Notes (WCAG Compliant)
+
+Accessibility is a core priority of this application. CivicGuide adheres to WCAG standards:
+
+- **High Contrast Mode:** Dedicated toggle (top right) persisting user preference via `localStorage` for improved readability.
+- **Keyboard Navigation:** Full support with visible focus rings (`:focus-visible`) across all interactive elements.
+- **Screen Reader Support:** 
+  - ARIA labels on semantic HTML landmarks (`<nav>`, `<main>`, `<aside>`).
+  - `aria-live="polite"` regions for dynamic chat updates.
+  - "Skip to Main Content" links to bypass navigation.
+- **Responsive Layout:** Perfectly scales from mobile devices to large desktop monitors.
+
+---
+
+## 🧪 Testing Instructions
+
+The application includes a built-in automated visual test runner.
+
+1. Navigate to the `/test/` directory (`http://localhost:8080/test/` locally, or via the live demo link above).
+2. The browser runs 18 distinct test cases against the core knowledge engine.
+3. It validates that all 15 core topics resolve to the correct HTML payload.
+4. It ensures negative edge cases trigger the fallback catch-all response correctly.
+5. The UI prints out a summary (e.g. `18 / 18 Tests Passed`).
+
+---
+
+## ☁️ Google Services Integration
+
+The project is heavily integrated with the Google ecosystem:
+
+- **Google Cloud Run:** Hosts the Dockerized static site in a highly scalable serverless container.
+- **Google Translate:** Injected to dynamically translate the UI into dozens of languages.
+- **Google Maps:** Embedded dynamically via iframe for "Where is my polling station?" queries.
+- **Google Analytics (gtag):** Event tracking hooked into the `ask()` function to measure the most queried election topics.
+- **Google Fonts:** Utilizes Playfair Display and DM Sans for modern typography.
+- **Google Antigravity:** Developed end-to-end within the Deepmind Antigravity environment.
+
+---
+
+## 🏗 Architecture & Repository Structure
 
 ```
-index.html  (single file — HTML + CSS + JS)
-│
-├── Built-in Knowledge Base (KB)
-│   ├── 15+ topic modules covering all major election topics
-│   ├── Country-specific data for US, India, UK, Canada, Australia + General
-│   └── Keyword matching engine with fuzzy topic detection
-│
-├── Interactive UI
-│   ├── Conversational chat interface
-│   ├── Visual 9-step election timeline
-│   ├── Country selector (10 countries)
-│   ├── Quick topic sidebar with 11 topics
-│   └── Follow-up suggestion chips
-│
-└── Dockerfile
-    └── nginx:alpine — serves index.html on port 8080 for Cloud Run
+/
+├── index.html       # UI Shell + Styling + Event Handling
+├── knowledge.js     # Extracted Knowledge Base Engine & Country Data
+├── Dockerfile       # nginx:alpine configuration for Cloud Run
+├── README.md        # This file
+└── test/
+    ├── index.html   # Visual Test Runner UI
+    └── test.js      # 18-case validation script against knowledge.js
 ```
 
 ### Knowledge Topics Covered
@@ -60,7 +102,7 @@ index.html  (single file — HTML + CSS + JS)
 
 ---
 
-## Running the App
+## 🚀 Running the App
 
 ### Option 1 — Open directly in browser (no server needed)
 ```bash
@@ -68,18 +110,13 @@ open index.html
 # or double-click the file
 ```
 
-### Option 2 — Run in Antigravity
-1. Open Antigravity
-2. Clone this repo into a workspace
-3. Open `index.html` in the browser panel — it runs immediately
-
-### Option 3 — Local server
+### Option 2 — Local server
 ```bash
 python3 -m http.server 8080
 # visit http://localhost:8080
 ```
 
-### Option 4 — Docker locally
+### Option 3 — Docker locally
 ```bash
 docker build -t civicguide .
 docker run -p 8080:8080 civicguide
@@ -88,7 +125,7 @@ docker run -p 8080:8080 civicguide
 
 ---
 
-## Deploying to Google Cloud Run
+## ☁️ Deploying to Google Cloud Run
 
 ```bash
 # Authenticate
@@ -103,36 +140,3 @@ gcloud run deploy civicguide \
   --allow-unauthenticated \
   --port 8080
 ```
-
-No environment variables, no secrets, no API keys needed. The deployment completes in ~2 minutes.
-
----
-
-## Google Services Used
-
-- **Google Fonts** — Playfair Display + DM Sans typography
-- **Google Cloud Run** — Serverless container hosting
-- **Google Antigravity** — Used to develop, test, and deploy the application
-- **Built to integrate with Gemini** — The knowledge engine can be augmented with Gemini API calls with zero structural changes
-
----
-
-## Assumptions
-
-1. The app covers general election education — users are directed to official government sources for jurisdiction-specific current rules
-2. Country data covers the most common scenarios; local elections may vary
-3. The app is intentionally non-partisan — it explains processes, not political positions
-4. All information is built-in; no internet connection required after the initial page load
-
----
-
-## Repository Structure
-
-```
-/
-├── index.html    # Complete app — HTML + CSS + JS knowledge engine
-├── Dockerfile    # nginx:alpine container for Cloud Run
-└── README.md     # This file
-```
-
----

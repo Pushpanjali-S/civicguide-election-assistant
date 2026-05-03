@@ -982,6 +982,10 @@
 
     <script src="knowledge.js"></script>
     <script>
+        /**
+         * Retrieves the currently selected country code from the dropdown.
+         * @returns {string} The selected 2-letter country code (e.g., 'US', 'IN') or 'GEN'.
+         */
         function getCountry() {
             return document.getElementById('countrySelect').value;
         }
@@ -989,10 +993,30 @@
         // ─────────────────────────────────────────────
         // UI FUNCTIONS
         // ─────────────────────────────────────────────
+        
+        /**
+         * Automatically resizes the textarea height based on its content.
+         * @param {HTMLElement} el - The textarea element to resize.
+         */
         function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 110) + 'px'; }
+        
+        /**
+         * Handles the keydown event on the textarea, allowing 'Enter' to submit.
+         * @param {KeyboardEvent} e - The keyboard event.
+         */
         function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
+        
+        /**
+         * Scrolls the chat area to the absolute bottom smoothly.
+         */
         function scrollBottom() { const ca = document.getElementById('chatArea'); ca.scrollTop = ca.scrollHeight; }
 
+        /**
+         * Adds a message bubble to the chat UI.
+         * @param {string} role - The sender role ('user' or 'ai').
+         * @param {string} html - The HTML string content of the message.
+         * @param {string[]} [suggests] - An optional array of suggested follow-up query strings.
+         */
         function addMsg(role, html, suggests) {
             const ca = document.getElementById('chatArea');
             const isUser = role === 'user';
@@ -1015,6 +1039,9 @@
             scrollBottom();
         }
 
+        /**
+         * Renders an animated "typing" indicator to represent the AI processing.
+         */
         function showTyping() {
             const ca = document.getElementById('chatArea');
             const row = document.createElement('div');
@@ -1024,8 +1051,15 @@
             row.innerHTML = `<div class="avatar ai" aria-hidden="true">C</div><div class="typing-bubble"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
             ca.appendChild(row); scrollBottom();
         }
+        
+        /**
+         * Removes the typing indicator from the DOM.
+         */
         function hideTyping() { const el = document.getElementById('typingRow'); if (el) el.remove(); }
 
+        /**
+         * Triggers a special UI flow to generate and display an interactive election timeline.
+         */
         function showTimeline() {
             const c = COUNTRY_NAMES[getCountry()] || 'General';
             addMsg('user', 'Show me the election process timeline');
@@ -1065,6 +1099,9 @@
             }, 400);
         }
 
+        /**
+         * Reads the input from the textarea and dispatches the user query.
+         */
         function sendMessage() {
             const inp = document.getElementById('userInput');
             const text = inp.value.trim();
@@ -1073,6 +1110,10 @@
             ask(text);
         }
 
+        /**
+         * Core orchestrator: adds user message, logs event, simulates typing, and fetches AI response.
+         * @param {string} text - The query text provided by the user.
+         */
         function ask(text) {
             addMsg('user', text);
             
@@ -1094,7 +1135,13 @@
             }, 500 + Math.random() * 300);
         }
 
-        // High Contrast Mode Logic
+        // ─────────────────────────────────────────────
+        // ACCESSIBILITY & CONFIGURATION
+        // ─────────────────────────────────────────────
+        
+        /**
+         * Toggles high contrast mode globally and persists the preference in localStorage.
+         */
         function toggleHighContrast() {
             const body = document.body;
             body.classList.toggle('high-contrast');
