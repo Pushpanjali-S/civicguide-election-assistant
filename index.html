@@ -8,6 +8,15 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
+        
+    <!-- Google Analytics (Placeholder ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YOUR_MEASUREMENT_ID');
+    </script>
     <style>
         :root {
             --navy: #0B1F3A;
@@ -776,6 +785,7 @@
             <div class="logo-text">Civic<span>Guide</span></div>
         </div>
         <div class="header-right">
+            <div id="google_translate_element"></div>
             <div class="status-dot"></div>
             <div class="header-badge">Election Assistant</div>
         </div>
@@ -819,6 +829,8 @@
             <div class="sidebar-divider"></div>
             <div class="sidebar-section">
                 <div class="sidebar-label">More Topics</div>
+                <button class="topic-btn" onclick="ask('Where do I vote?')"><span
+                        class="t-icon t-amber">📍</span>Where to Vote</button>
                 <button class="topic-btn" onclick="ask('What are my rights as a voter?')"><span
                         class="t-icon t-green">⚖️</span>Voter Rights</button>
                 <button class="topic-btn" onclick="ask('Who can run for office and how?')"><span
@@ -1016,6 +1028,20 @@
                 suggest: ['Show me the full election timeline', 'What happens on election day?', 'How long does the whole process take?']
             },
             {
+                keys: ['where to vote', 'where do i vote', 'polling station', 'polling location', 'voting location', 'polling place'],
+                ans: `<h4>Find Your Polling Station</h4><p>Polling locations are assigned based on your registered address. You must usually vote at your specific assigned location on election day.</p><p>Use the map below to explore polling stations near your current location, or check your official voter registration card for your exact assigned location.</p>
+                <iframe 
+                  width="100%" 
+                  height="260" 
+                  style="border:1px solid var(--border); border-radius: 12px; margin-top: 10px;" 
+                  loading="lazy" 
+                  allowfullscreen 
+                  referrerpolicy="no-referrer-when-downgrade" 
+                  src="https://maps.google.com/maps?q=polling+station+near+me&output=embed">
+                </iframe>`,
+                suggest: ['What do I need to bring to vote?', 'What are the polling hours?', 'Can I vote anywhere?']
+            },
+            {
                 keys: ['thank', 'hello', 'hi', 'hey', 'good', 'great', 'help', 'what can you', 'what do you', 'who are you'],
                 ans: `<p>Hello! I'm <strong>CivicGuide</strong>, your election education assistant. I'm here to help you understand how democracy works — from voter registration to election results.</p><p>I can explain:</p><ul><li>📋 How to register to vote</li><li>🗳️ What happens on election day</li><li>📊 How votes are counted</li><li>🏛️ Electoral systems (FPTP, PR, preferential voting)</li><li>⚖️ Your rights as a voter</li><li>🛡️ How to spot misinformation</li><li>And much more!</li></ul><p>Select your country from the sidebar and ask me anything.</p>`,
                 suggest: ['How do I register to vote?', 'Show me the election timeline', 'What are my voter rights?']
@@ -1131,6 +1157,16 @@
 
         function ask(text) {
             addMsg('user', text);
+            
+            // Track topic in Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'ask_topic', {
+                    'event_category': 'Engagement',
+                    'event_label': text,
+                    'topic': text
+                });
+            }
+            
             showTyping();
             setTimeout(() => {
                 hideTyping();
@@ -1140,6 +1176,12 @@
             }, 500 + Math.random() * 300);
         }
     </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 </html>
